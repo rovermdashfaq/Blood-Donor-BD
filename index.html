@@ -1939,14 +1939,14 @@ async function downloadPDF() {
         // Generate PDF with enhanced settings
         await html2pdf()
             .set({
-                margin: [10, 15, 10, 15],
+                margin: [10, 10, 10, 10],
                 filename: `Blood_Donor_BD_Report_${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.pdf`,
                 html2canvas: { 
-                    scale: 3,
+                    scale: 2,
                     useCORS: true,
                     logging: false,
                     letterRendering: true,
-                    windowWidth: 1200
+                    windowWidth: 720
                 },
                 jsPDF: { 
                     unit: 'mm', 
