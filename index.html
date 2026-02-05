@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donor BD | Save Lives Through Blood Donation</title>
+    <link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX3OW5MKsXyEr_acEYrI53dUwJZiKIS9BhmLD3I4izx0zGNxnqsHFh68Qp1mWup-HB0ZZa-Oy2Nk1dmbclSZgho6e1605dbPiP6WGIQgsq-QIJM-_Wvd8dNDZcjmpbXwAjcw2hkuWuSRt_a7KqWYWMHfFclfQ2P4u7LhKNfKns0-eXMzm4WZNLhyphenhyphenNcphI/s1280/1000024555.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <meta name="description" content="Blood Donor BD: Find blood donors across Bangladesh and register to save lives. Search by blood group, district, and upazila.">
+    <meta name="keywords" content="blood donation, blood donor, Bangladesh, save lives, blood group, donor search, register donor, emergency blood">
+    <meta name="author" content="Md. Ashfaqur Rahman Tanim">
+    <style>
+        :root {
+            --primary: #e63946;
+            --primary-dark: #d32f2f;
+            --primary-light: #ff6b6b;
+            --secondary: #2d6a4f;
+            --accent: #40916c;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --card-shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8f9fa;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--primary);
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+    background: var(--primary);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* optional: space between icon and text */
+}
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-outline-green {
+           background: white;
+           color: green;
+           border: 2px solid green;
+        }
+        .btn-outline-green:hover {
+          background: green;
+          color: white;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.9), rgba(45, 106, 79, 0.9)),
+                        url('https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 1rem;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Main Container */
+        .container {
+          text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .search-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '▼';
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            pointer-events: none;
+        }
+
+        .select-wrapper select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--light-gray);
+            padding: 4px;
+            border-radius: 8px;
+            width: fit-content;
+            margin: 0 auto 2rem;
+        }
+
+        .view-btn {
+            padding: 0.5rem 1rem;
+            background: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--card-shadow);
+        }
+
+        /* Table View */
+        .table-container {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            display: none;
+        }
+
+        .table-container.active {
+            display: block;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .data-table tr:hover {
+            background: rgba(230, 57, 70, 0.05);
+        }
+
+        .blood-group {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Card View */
+        .cards-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cards-container.active {
+            display: grid;
+        }
+
+        .donor-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .donor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .blood-group-lg {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            background: rgba(230, 57, 70, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+        }
+
+        .donor-email {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            word-break: break-all;
+        }
+
+        .donor-phone {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .donor-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .donor-date {
+            color: var(--gray);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .action-btn.call {
+            background: rgba(45, 106, 79, 0.1);
+            color: var(--secondary);
+        }
+
+        .action-btn.call:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .action-btn.email {
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--primary);
+        }
+
+        .action-btn.email:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            grid-column: 1 / -1;
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 1rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .developer-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .developer-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Action Buttons Container */
+        .action-buttons-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                border-radius: 0 0 16px 16px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .search-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons-container {
+                flex-direction: column;
+                align-items: center;
+                
+            }
+
+            .action-buttons-container .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            .data-table {
+                min-width: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX3OW5MKsXyEr_acEYrI53dUwJZiKIS9BhmLD3I4izx0zGNxnqsHFh68Qp1mWup-HB0ZZa-Oy2Nk1dmbclSZgho6e1605dbPiP6WGIQgsq-QIJM-_Wvd8dNDZcjmpbXwAjcw2hkuWuSRt_a7KqWYWMHfFclfQ2P4u7LhKNfKns0-eXMzm4WZNLhyphenhyphenNcphI/s1280/1000024555.png" alt="Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>Blood Donor BD</h1>
+                    <p>Save Lives, Donate Blood</p>
+                </div>
+            </a>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#search" class="nav-link">Find Donors</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc2AhG_yMIUFhyU53ExHePIZoun9qa0ldME2yuE1FJBZ7bTaw/viewform" target="_blank" class="btn btn-outline-green"><i class="fas fa-user-plus"></i>Register as Donor</a>
+                <a href="https://blooddonor-database.blogspot.com/2025/04/blood-donor-bd-body-font-family-segoe.html" target="_blank" class="btn btn-outline">
+                    <i class="fas fa-sign-in-alt"></i> Admin Login
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Every Drop Counts, Every Donor Matters</h1>
+            <p>Find blood donors across Bangladesh when you need them most. Join thousands of life-savers in our mission.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalDonors">1,250+</span>
+                    <span class="stat-label">Active Donors</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="totalDistricts">64</span>
+                    <span class="stat-label">Districts Covered</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Lives Saved</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Search Section -->
+        <section id="search" class="search-section">
+            <h2 class="section-title">Find Blood Donors</h2>
+            <p style="margin-bottom: 2rem; color: var(--gray);">Search our database of verified blood donors across Bangladesh</p>
+
+            <div class="search-grid">
+                <div class="form-group">
+                    <label class="form-label">Blood Group</label>
+                    <div class="select-wrapper">
+                        <select id="searchBlood" class="form-control">
+                            <option value="">Any Blood Group</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">District</label>
+                    <input type="text" id="searchDistrict" class="form-control" placeholder="Enter district name">
+                    <div id="districtSuggestions" class="suggestions"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Upazila/Area</label>
+                    <input type="text" id="searchUpazila" class="form-control" placeholder="Enter upazila name">
+                    <div id="upazilaSuggestions" class="suggestions"></div>
+                </div>
+            </div>
+
+            <button onclick="searchDonors()" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+                <i class="fas fa-search"></i> Search Donors
+            </button>
+            
+            <!-- Action Buttons -->
+        <div class="action-buttons-container">
+            <button onclick="copyToClipboard()" class="btn btn-outline">
+                <i class="fas fa-copy"></i> Copy All Data
+            </button>
+            <button onclick="downloadCSV()" class="btn btn-outline">
+                <i class="fas fa-file-csv"></i> Export as CSV
+            </button>
+            <button onclick="downloadPDF()" class="btn btn-outline">
+                <i class="fas fa-file-pdf"></i> Export as PDF
+            </button>
+            <button onclick="clearSearch()" class="btn btn-outline">
+                <i class="fas fa-redo"></i> Clear Search
+            </button>
+        </div>
+        </section>
+        
+        <!-- View Toggle -->
+        <div class="view-toggle">
+            <button class="view-btn" id="tableViewBtn" onclick="showTableView()">
+                <i class="fas fa-table"></i> Table View
+            </button>
+            <button class="view-btn active" id="cardViewBtn" onclick="showCardView()">
+                <i class="fas fa-th-large"></i> Card View
+            </button>
+        </div>
+
+        <!-- Table View -->
+        <div class="table-container" id="tableView">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Blood Group</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>District</th>
+                        <th>Upazila</th>
+                        <th>Registration Date</th>
+                    </tr>
+                </thead>
+                <tbody id="donorTableBody">
+                    <!-- Data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Card View -->
+        <div class="cards-container active" id="cardView">
+            <!-- Cards will be populated here -->
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons-container">
+            <button onclick="copyToClipboard()" class="btn btn-outline">
+                <i class="fas fa-copy"></i> Copy All Data
+            </button>
+            <button onclick="downloadCSV()" class="btn btn-outline">
+                <i class="fas fa-file-csv"></i> Export as CSV
+            </button>
+            <button onclick="downloadPDF()" class="btn btn-outline">
+                <i class="fas fa-file-pdf"></i> Export as PDF
+            </button>
+            <button onclick="clearSearch()" class="btn btn-outline">
+                <i class="fas fa-redo"></i> Clear Search
+            </button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Blood Donor BD</h3>
+                    <p style="color: #adb5bd; margin-bottom: 1rem;">Connecting blood donors with recipients across Bangladesh. Your donation saves lives.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="https://www.facebook.com/share/1getnhDs55/" target="_blank" style="color: white; font-size: 1.2rem;">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.facebook.com/groups/566092693108418" target="_blank" style="color: white; font-size: 1.2rem;">
+                            <i class="fas fa-users"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#search">Find Donors</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc2AhG_yMIUFhyU53ExHePIZoun9qa0ldME2yuE1FJBZ7bTaw/viewform" target="_blank">Register as Donor</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:blooddonorbd25@gmail.com">blooddonorbd25@gmail.com</a></li>
+                        <li><a href="tel:+880">Emergency Hotline</a></li>
+                        <li><a href="https://wa.me/qr/3ITBKA5Y5SUSI1" target="_blank">WhatsApp Contact</a></li>
+                        <li><a href="https://maps.app.goo.gl/hgouFTQoppKvKF7p6" target="_blank">Bangladesh</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="developer-info" style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 13px;">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCDeXufBywGlGcvjFv5OaZNnGnIFboYZgUyo9NPcDt7SH5dWhG6Kv7wOtGMm5uBfA-2RCI41U0IWscQhEPQ9_6mHg192N68FaFDDE4HIfb8zXw6Ubafj329ToS6mYTqHo8Wu8aRidwjczDQZ4Id_t7K-E32b8ZthoHTIH3r86pWwfOmFdNvgcQOOeHBDc/s2000/1000038033.png" alt="Developer" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+    <div style="text-align: center;">
+        <h4 style="color: white; margin-bottom: 0.25rem;">Md. Ashfaqur Rahman Tanim</h4>
+        <p style="color: #adb5bd; font-size: 0.9rem;">Full Stack Developer</p>
+    </div>
+</div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Blood Donor BD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        // Global variables
+        let donorData = [];
+        let uniqueDistricts = new Set();
+        let uniqueUpazilas = new Set();
+        let currentView = 'card'; // Changed to card as default
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Mobile menu toggle
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                document.getElementById('navLinks').classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#navLinks') && !e.target.closest('#mobileMenuBtn')) {
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+
+            // Fetch data
+            fetchDonors();
+            fetchStatistics();
+        });
+
+        // Fetch donor data
+        async function fetchDonors() {
+            const sheetURL = 'https://docs.google.com/spreadsheets/d/1p3LQrm9pfvewDNXGZ5sIN_a6hwfbn4AqBcwp8eGPibQ/export?format=tsv';
+            
+            try {
+                const response = await fetch(sheetURL);
+                const data = await response.text();
+                const rows = data.split("\n").map(row => row.split("\t"));
+                
+                donorData = rows.slice(1).map(row => ({
+                    addedTime: row[0] || 'N/A',
+                    email: row[1] || 'N/A',
+                    bloodGroup: row[2] || 'N/A',
+                    phone: row[3] || 'N/A',
+                    district: (row[4] || '').toUpperCase().trim(),
+                    upazila: (row[5] || '').toUpperCase().trim()
+                })).filter(donor => donor.email !== 'N/A');
+
+                // Populate unique values for suggestions
+                donorData.forEach(donor => {
+                    if (donor.district) uniqueDistricts.add(donor.district);
+                    if (donor.upazila) uniqueUpazilas.add(donor.upazila);
+                });
+
+                // Setup autocomplete
+                setupAutocomplete('searchDistrict', Array.from(uniqueDistricts), 'districtSuggestions');
+                setupAutocomplete('searchUpazila', Array.from(uniqueUpazilas), 'upazilaSuggestions');
+
+                // Display all donors initially
+                displayDonors(donorData);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                showError();
+            }
+        }
+
+        // Fetch statistics
+        async function fetchStatistics() {
+            const sheetURL = 'https://docs.google.com/spreadsheets/d/1p3LQrm9pfvewDNXGZ5sIN_a6hwfbn4AqBcwp8eGPibQ/export?format=tsv';
+            
+            try {
+                const response = await fetch(sheetURL);
+                const tsvText = await response.text();
+                const rows = tsvText.trim().split('\n').map(row => row.split('\t'));
+                
+                if (rows.length > 1 && rows[1].length > 11) {
+                    const totalDonors = rows[1][11];
+                    document.getElementById('totalDonors').textContent = totalDonors + '+';
+                }
+                
+                if (rows.length > 1 && rows[1].length > 16) {
+                    const totalDistricts = rows[1][16];
+                    document.getElementById('totalDistricts').textContent = totalDistricts;
+                }
+            } catch (error) {
+                console.error('Error fetching statistics:', error);
+            }
+        }
+
+        // Setup autocomplete
+        function setupAutocomplete(inputId, data, suggestionId) {
+            const input = document.getElementById(inputId);
+            const suggestions = document.getElementById(suggestionId);
+            
+            input.addEventListener('input', function() {
+                const value = this.value.toUpperCase();
+                suggestions.innerHTML = '';
+                
+                if (!value) return;
+                
+                const matches = data.filter(item => item.includes(value)).slice(0, 5);
+                
+                matches.forEach(match => {
+                    const div = document.createElement('div');
+                    div.textContent = match;
+                    div.style.padding = '0.5rem 1rem';
+                    div.style.cursor = 'pointer';
+                    div.style.transition = 'background 0.2s';
+                    div.addEventListener('mouseenter', () => {
+                        div.style.background = 'var(--light-gray)';
+                    });
+                    div.addEventListener('mouseleave', () => {
+                        div.style.background = 'white';
+                    });
+                    div.addEventListener('click', () => {
+                        input.value = match;
+                        suggestions.innerHTML = '';
+                    });
+                    suggestions.appendChild(div);
+                });
+            });
+            
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                if (e.target !== input) {
+                    suggestions.innerHTML = '';
+                }
+            });
+        }
+
+        // Search donors
+        function searchDonors() {
+            const blood = document.getElementById('searchBlood').value.toUpperCase();
+            const district = document.getElementById('searchDistrict').value.toUpperCase().trim();
+            const upazila = document.getElementById('searchUpazila').value.toUpperCase().trim();
+            
+            let filtered = donorData.filter(donor => {
+                const bloodMatch = !blood || donor.bloodGroup === blood;
+                const districtMatch = !district || donor.district.includes(district);
+                const upazilaMatch = !upazila || donor.upazila.includes(upazila);
+                return bloodMatch && districtMatch && upazilaMatch;
+            });
+            
+            displayDonors(filtered);
+        }
+
+        // Display donors based on current view
+        function displayDonors(filteredData) {
+            if (currentView === 'table') {
+                displayTableView(filteredData);
+            } else {
+                displayCardView(filteredData);
+            }
+        }
+
+        // Display table view
+        function displayTableView(filteredData) {
+            const tableBody = document.getElementById('donorTableBody');
+            
+            if (!filteredData || filteredData.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 3rem; color: var(--gray);">
+                            <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem; display: block; color: var(--light-gray);"></i>
+                            No donors found matching your criteria
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            tableBody.innerHTML = filteredData.map(donor => `
+                <tr>
+                    <td><span class="blood-group">${donor.bloodGroup}</span></td>
+                    <td>${donor.email}</td>
+                    <td>${donor.phone}</td>
+                    <td>${donor.district}</td>
+                    <td>${donor.upazila}</td>
+                    <td style="color: var(--gray); font-size: 0.9rem;">${formatDate(donor.addedTime)}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Display card view
+        function displayCardView(filteredData) {
+            const cardContainer = document.getElementById('cardView');
+            
+            if (!filteredData || filteredData.length === 0) {
+                cardContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3 style="margin-bottom: 0.5rem; color: var(--dark);">No donors found</h3>
+                        <p style="color: var(--gray);">Try adjusting your search criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            cardContainer.innerHTML = filteredData.map(donor => `
+                <div class="donor-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="blood-group-lg">${donor.bloodGroup}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="donor-email">${donor.email}</div>
+                    <div class="donor-phone">
+                        <i class="fas fa-phone" style="color: var(--secondary); margin-right: 8px;"></i>
+                        ${donor.phone}
+                    </div>
+                    
+                    <div class="donor-location">
+                        <i class="fas fa-map-marker-alt" style="color: var(--primary);"></i>
+                        ${donor.district}, ${donor.upazila}
+                    </div>
+                    
+                    <div class="donor-date">
+                        <i class="far fa-calendar" style="margin-right: 5px;"></i>
+                        Registered: ${formatDate(donor.addedTime)}
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="action-btn call" onclick="callDonor('${donor.phone}')">
+                            <i class="fas fa-phone"></i> Call
+                        </button>
+                        <button class="action-btn email" onclick="emailDonor('${donor.email}')">
+                            <i class="fas fa-envelope"></i> Email
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            if (!dateString || dateString === 'N/A') return 'N/A';
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            } catch (e) {
+                return dateString;
+            }
+        }
+
+        // Show table view
+        function showTableView() {
+            currentView = 'table';
+            document.getElementById('tableView').classList.add('active');
+            document.getElementById('cardView').classList.remove('active');
+            document.getElementById('tableViewBtn').classList.add('active');
+            document.getElementById('cardViewBtn').classList.remove('active');
+            displayTableView(getFilteredData());
+        }
+
+        // Show card view
+        function showCardView() {
+            currentView = 'card';
+            document.getElementById('tableView').classList.remove('active');
+            document.getElementById('cardView').classList.add('active');
+            document.getElementById('tableViewBtn').classList.remove('active');
+            document.getElementById('cardViewBtn').classList.add('active');
+            displayCardView(getFilteredData());
+        }
+
+        // Get currently filtered data
+        function getFilteredData() {
+            const blood = document.getElementById('searchBlood').value.toUpperCase();
+            const district = document.getElementById('searchDistrict').value.toUpperCase().trim();
+            const upazila = document.getElementById('searchUpazila').value.toUpperCase().trim();
+            
+            return donorData.filter(donor => {
+                const bloodMatch = !blood || donor.bloodGroup === blood;
+                const districtMatch = !district || donor.district.includes(district);
+                const upazilaMatch = !upazila || donor.upazila.includes(upazila);
+                return bloodMatch && districtMatch && upazilaMatch;
+            });
+        }
+
+        // Clear search
+        function clearSearch() {
+            document.getElementById('searchBlood').value = '';
+            document.getElementById('searchDistrict').value = '';
+            document.getElementById('searchUpazila').value = '';
+            displayDonors(donorData);
+        }
+
+        // Call donor
+        function callDonor(phone) {
+            if (confirm(`Call ${phone}?`)) {
+                window.location.href = `tel:${phone}`;
+            }
+        }
+
+        // Email donor
+        function emailDonor(email) {
+            if (confirm(`Send email to ${email}?`)) {
+                window.location.href = `mailto:${email}`;
+            }
+        }
+
+        // Copy to clipboard
+        async function copyToClipboard() {
+            const data = getFilteredData();
+            if (data.length === 0) {
+                alert('No data to copy!');
+                return;
+            }
+            
+            let text = 'Blood Donor BD - Donor List\n\n';
+            data.forEach((donor, index) => {
+                text += `${index + 1}. ${donor.bloodGroup} | ${donor.email} | ${donor.phone} | ${donor.district} | ${donor.upazila}\n`;
+            });
+            
+            try {
+                await navigator.clipboard.writeText(text);
+                alert('Donor list copied to clipboard!');
+            } catch (err) {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy to clipboard. Please try again.');
+            }
+        }
+
+        // Download CSV
+        function downloadCSV() {
+            const data = getFilteredData();
+            if (data.length === 0) {
+                alert('No data to download!');
+                return;
+            }
+            
+            let csv = 'Blood Group,Email,Phone,District,Upazila,Registration Date\n';
+            data.forEach(donor => {
+                csv += `${donor.bloodGroup},${donor.email},${donor.phone},${donor.district},${donor.upazila},${donor.addedTime}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'blood_donor_bd.csv';
+            a.click();
+        }
+
+        // Download PDF
+        function downloadPDF() {
+            const data = getFilteredData();
+            if (data.length === 0) {
+                alert('No data to download!');
+                return;
+            }
+            
+            const element = document.createElement('div');
+            element.innerHTML = `
+                <div style="padding: 20px; font-family: Arial, sans-serif;">
+                    <h1 style="color: #e63946; text-align: center; margin-bottom: 20px;">Blood Donor BD</h1>
+                    <p style="text-align: center; color: #666; margin-bottom: 30px;">Donor List - Generated on ${new Date().toLocaleDateString()}</p>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #e63946; color: white;">
+                                <th style="padding: 10px; text-align: left;">Blood Group</th>
+                                <th style="padding: 10px; text-align: left;">Email</th>
+                                <th style="padding: 10px; text-align: left;">Phone</th>
+                                <th style="padding: 10px; text-align: left;">District</th>
+                                <th style="padding: 10px; text-align: left;">Upazila</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.slice(0, 50).map(donor => `
+                                <tr style="border-bottom: 1px solid #eee;">
+                                    <td style="padding: 10px;">${donor.bloodGroup}</td>
+                                    <td style="padding: 10px;">${donor.email}</td>
+                                    <td style="padding: 10px;">${donor.phone}</td>
+                                    <td style="padding: 10px;">${donor.district}</td>
+                                    <td style="padding: 10px;">${donor.upazila}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    <p style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+                        &copy; ${new Date().getFullYear()} Blood Donor BD
+                    </p>
+                </div>
+            `;
+            
+            html2pdf()
+                .set({
+                    margin: 10,
+                    filename: `blood_donor_bd_${new Date().toISOString().split('T')[0]}.pdf`,
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+                })
+                .from(element)
+                .save();
+        }
+
+        // Show error
+        function showError() {
+            const tableBody = document.getElementById('donorTableBody');
+            const cardContainer = document.getElementById('cardView');
+            
+            const errorHTML = `
+                <div style="text-align: center; padding: 3rem; color: var(--gray);">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; display: block; color: var(--light-gray);"></i>
+                    <h3 style="margin-bottom: 0.5rem; color: var(--dark);">Failed to load data</h3>
+                    <p style="margin-bottom: 1rem;">Please check your internet connection and try again.</p>
+                    <button onclick="fetchDonors()" class="btn btn-primary">
+                        <i class="fas fa-redo"></i> Retry
+                    </button>
+                </div>
+            `;
+            
+            if (tableBody) tableBody.innerHTML = errorHTML.replace('<div', '<tr><td colspan="6"><div').replace('</div>', '</div></td></tr>');
+            if (cardContainer) cardContainer.innerHTML = errorHTML;
+        }
+    </script>
+</body>
+</html>
