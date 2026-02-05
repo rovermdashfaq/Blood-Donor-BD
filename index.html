@@ -53,14 +53,46 @@
         }
 
         .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+}
 
+.header-container h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0;
+    letter-spacing: -0.5px;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.header-container h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 2px;
+    animation: underlineWidth 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes underlineWidth {
+    from { width: 20px; }
+    to { width: 150px; }
+}
         .logo {
             display: flex;
             align-items: center;
@@ -98,6 +130,7 @@
             text-decoration: none;
             color: var(--dark);
             font-weight: 600;
+            font-size: 15px;
             padding: 0.5rem 1rem;
             border-radius: 8px;
             transition: var(--transition);
@@ -109,7 +142,7 @@
         }
 
         .btn {
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.4rem;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
@@ -140,6 +173,7 @@
         .btn-outline {
             background: white;
             color: var(--primary);
+            font-size: 15px;
             border: 2px solid var(--primary);
         }
 
@@ -149,6 +183,7 @@
         }
         .btn-outline-green {
            background: white;
+           font-size: 15px;
            color: green;
            border: 2px solid green;
         }
@@ -165,6 +200,13 @@
             color: var(--dark);
             cursor: pointer;
         }
+        .mobile-menu-btn i {
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mobile-menu-btn.active i {
+    transform: rotate(180deg);
+}
 
         /* Hero Section */
         .hero {
@@ -183,11 +225,41 @@
         }
 
         .hero h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    position: relative;
+    display: inline-block;
+}
+
+.hero h1::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color, #fff); /* Your background color */
+    animation: typewriter 0.5s steps(40) forwards,
+               blink 0.75s step-end infinite;
+}
+
+@keyframes typewriter {
+    from { 
+        left: 0;
+        width: 100%;
+    }
+    to { 
+        left: 100%;
+        width: 0;
+    }
+}
+
+@keyframes blink {
+    from, to { border-right: 3px solid transparent; }
+    50% { border-right: 3px solid var(--primary); }
+}
 
         .hero p {
             font-size: 1.2rem;
@@ -499,30 +571,43 @@
             margin-bottom: 1rem;
         }
 
-        /* Footer */
+         /* Footer Styles */
         .footer {
-            background: var(--dark);
+            background: linear-gradient(135deg, var(--dark), #111);
             color: white;
-            padding: 3rem 1rem 1.5rem;
-            margin-top: 3rem;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
         }
 
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
 
-        .footer-grid {
+        .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjusted for responsiveness */
+            gap: 2rem; /* Adjusted for responsiveness */
             margin-bottom: 2rem;
         }
 
         .footer-section h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: white;
+            font-size: 1.2rem; /* Adjusted for responsiveness */
+            margin-bottom: 1rem; /* Adjusted for responsiveness */
+            position: relative;
+            padding-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
         }
 
         .footer-links {
@@ -530,35 +615,144 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem; /* Adjusted for responsiveness */
         }
 
         .footer-links a {
-            color: #adb5bd;
+            color: #ccc;
             text-decoration: none;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem; /* Adjusted for responsiveness */
         }
 
         .footer-links a:hover {
             color: white;
-            padding-left: 5px;
+            padding-left: 10px;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem; /* Adjusted for responsiveness */
+            margin-top: 1rem; /* Adjusted for responsiveness */
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px; /* Adjusted for responsiveness */
+            height: 40px; /* Adjusted for responsiveness */
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.1rem; /* Adjusted for responsiveness */
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px) rotate(5deg);
+            box-shadow: 0 5px 15px rgba(198, 40, 40, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem; /* Adjusted for responsiveness */
+            color: #aaa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-bottom img {
+            width: 35px; /* Adjusted for responsiveness */
+            height: 35px; /* Adjusted for responsiveness */
         }
 
         .developer-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 13px;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideIn 0.8s ease forwards;
+}
 
-        .developer-info img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.developer-info img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary);
+    position: relative;
+    animation: 
+        bounce 2s ease-in-out infinite,
+        borderPulse 3s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes borderPulse {
+    0%, 100% { border-width: 2px; }
+    50% { border-width: 4px; }
+}
+
+.developer-info h4 {
+    color: white;
+    margin-bottom: 0.25rem;
+    overflow: hidden;
+    border-right: 3px solid var(--primary);
+    white-space: nowrap;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary) }
+}
+
+.developer-info p {
+    color: #adb5bd;
+    font-size: 0.9rem;
+    animation: fadeInUp 0.8s ease 2s forwards;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
         .footer-bottom {
             text-align: center;
@@ -711,7 +905,7 @@
                     <span class="stat-label">Districts Covered</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number">500+</span>
+                    <span class="stat-number"id="livesSaved">500+</span>
                     <span class="stat-label">Lives Saved</span>
                 </div>
             </div>
@@ -828,43 +1022,49 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer" id="contact">
+<!-- Footer -->
+    <footer class="footer">
         <div class="footer-container">
-            <div class="footer-grid">
+            <div class="footer-content">
                 <div class="footer-section">
                     <h3>Blood Donor BD</h3>
-                    <p style="color: #adb5bd; margin-bottom: 1rem;">Connecting blood donors with recipients across Bangladesh. Your donation saves lives.</p>
-                    <div style="display: flex; gap: 1rem;">
-                        <a href="https://www.facebook.com/share/1getnhDs55/" target="_blank" style="color: white; font-size: 1.2rem;">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://www.facebook.com/groups/566092693108418" target="_blank" style="color: white; font-size: 1.2rem;">
-                            <i class="fas fa-users"></i>
-                        </a>
+                    <p>Connecting blood donors with those in need across Bangladesh. Your single donation can save up to three lives. Join our mission today.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1getnhDs55/" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/groups/566092693108418/?ref=share&mibextid=NSMWBT" class="social-link" target="_blank"><i class="fas fa-users"></i></a>
                     </div>
                 </div>
 
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#search">Find Donors</a></li>
-                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc2AhG_yMIUFhyU53ExHePIZoun9qa0ldME2yuE1FJBZ7bTaw/viewform" target="_blank">Register as Donor</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#search"><i class="fas fa-search"></i> Find Donors</a></li>
+                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc2AhG_yMIUFhyU53ExHePIZoun9qa0ldME2yuE1FJBZ7bTaw/viewform" target="_blank"><i class="fas fa-user-plus"></i> Register as Donor</a></li>
+                        <li><a href="https://blooddonor-database.blogspot.com/2025/04/blood-donor-bd-body-font-family-segoe.html" target="_blank"><i class="fas fa-sign-in-alt"></i> Admin Login</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-section">
                     <h3>Contact Info</h3>
                     <ul class="footer-links">
-                        <li><a href="mailto:blooddonorbd25@gmail.com">blooddonorbd25@gmail.com</a></li>
-                        <li><a href="tel:+880">Emergency Hotline</a></li>
-                        <li><a href="https://wa.me/qr/3ITBKA5Y5SUSI1" target="_blank">WhatsApp Contact</a></li>
-                        <li><a href="https://maps.app.goo.gl/hgouFTQoppKvKF7p6" target="_blank">Bangladesh</a></li>
+                        <li><a href="mailto:blooddonorbd25@gmail.com"><i class="fas fa-envelope"></i> blooddonorbd25@gmail.com</a></li>
+                        <li><a href="https://wa.me/qr/3ITBKA5Y5SUSI1"><i class="fas fa-phone"></i> Emergency Contact</a></li>
+                        <li><a href="https://maps.app.goo.gl/hgouFTQoppKvKF7p6"><i class="fas fa-map-marker-alt"></i> Bangladesh</a></li>
                     </ul>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/MD.Ashfaq01" class="social-link" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/md.ashfaq01" class="social-link" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@mdashfaq.king?_t=ZS-8zQHzCpJy9H&_r=1" class="social-link" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://x.com/Mart_Ashfaq" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/in/md-ashfaqur-rahman-tanim-407805290" class="social-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/@md.ashfaq01" class="social-link" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://mdashfaqurrahmantanim.blogspot.com/2024/11/mdashfaq.com.html?m=1" class="social-link" target="_blank" title="Blogger"><i class="fas fa-blog"></i></a>
+                    </div>
                 </div>
             </div>
+
+
 
             <div class="developer-info" style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 13px;">
     <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCDeXufBywGlGcvjFv5OaZNnGnIFboYZgUyo9NPcDt7SH5dWhG6Kv7wOtGMm5uBfA-2RCI41U0IWscQhEPQ9_6mHg192N68FaFDDE4HIfb8zXw6Ubafj329ToS6mYTqHo8Wu8aRidwjczDQZ4Id_t7K-E32b8ZthoHTIH3r86pWwfOmFdNvgcQOOeHBDc/s2000/1000038033.png" alt="Developer" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
@@ -963,6 +1163,10 @@
                 if (rows.length > 1 && rows[1].length > 16) {
                     const totalDistricts = rows[1][16];
                     document.getElementById('totalDistricts').textContent = totalDistricts;
+                }
+                if (rows.length > 1 && rows[1].length > 14) {
+                    const livesSaved = rows[1][14];
+                    document.getElementById('livesSaved').textContent = livesSaved + '+';
                 }
             } catch (error) {
                 console.error('Error fetching statistics:', error);
@@ -1128,6 +1332,11 @@
                 return dateString;
             }
         }
+        
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+    this.classList.toggle('active');
+    // Your menu toggle logic here
+});
 
         // Show table view
         function showTableView() {
