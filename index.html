@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Donor BD | Save Lives Through Blood Donation</title>
-    <link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX3OW5MKsXyEr_acEYrI53dUwJZiKIS9BhmLD3I4izx0zGNxnqsHFh68Qp1mWup-HB0ZZa-Oy2Nk1dmbclSZgho6e1605dbPiP6WGIQgsq-QIJM-_Wvd8dNDZcjmpbXwAjcw2hkuWuSRt_a7KqWYWMHfFclfQ2P4u7LhKNfKns0-eXMzm4WZNLhyphenhyphenNcphI/s1280/1000024555.png" type="image/x-icon">
+    <!-- Title will be loaded from Firebase -->
+    <title id="pageTitle">Loading...</title>
+    <!-- Favicon will be loaded from Firebase -->
+    <link rel="icon" id="favicon" href="" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <meta name="description" content="Blood Donor BD: Find blood donors across Bangladesh and register to save lives. Search by blood group, district, and upazila.">
-    <meta name="keywords" content="blood donation, blood donor, Bangladesh, save lives, blood group, donor search, register donor, emergency blood">
-    <meta name="author" content="Md. Ashfaqur Rahman Tanim">
+    <!-- Meta tags will be loaded from Firebase -->
+    <meta name="description" id="metaDescription" content="">
+    <meta name="keywords" id="metaKeywords" content="">
+    <meta name="author" id="metaAuthor" content="">
     <style>
         :root {
             --primary: #e63946;
@@ -28,6 +31,7 @@
             --info: #1a73e8;
             --warning: #f39c12;
             --error: #e63946;
+            --admin: #9c27b0;
         }
 
         * {
@@ -146,13 +150,6 @@
             }
         }
 
-        @keyframes slideOut {
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-
         /* Header */
         .header {
             background: white;
@@ -169,39 +166,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
-        }
-
-        .header-container h1 {
-            font-size: 2rem;
-            font-weight: 900;
-            color: #1a1a1a;
-            margin: 0;
-            letter-spacing: -0.5px;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .header-container h1::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 2px;
-            animation: underlineWidth 0.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes underlineWidth {
-            from { width: 20px; }
-            to { width: 150px; }
         }
 
         .logo {
@@ -324,10 +288,78 @@
             transform: rotate(180deg);
         }
 
+        /* Authentication Styles */
+        .auth-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .auth-container.active {
+            display: flex;
+        }
+
+        .auth-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 0.8rem;
+            background: none;
+            border: none;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .auth-tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .auth-content {
+            display: none;
+        }
+
+        .auth-content.active {
+            display: block;
+        }
+
+        .auth-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, rgba(230, 57, 70, 0.9), rgba(45, 106, 79, 0.9)),
-                        url('https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+                        url('');
             background-size: cover;
             background-position: center;
             color: white;
@@ -345,36 +377,6 @@
             font-weight: 900;
             margin-bottom: 1rem;
             line-height: 1.2;
-            position: relative;
-            display: inline-block;
-        }
-
-        .hero h1::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-color, #fff);
-            animation: typewriter 0.5s steps(40) forwards,
-                       blink 0.75s step-end infinite;
-        }
-
-        @keyframes typewriter {
-            from { 
-                left: 0;
-                width: 100%;
-            }
-            to { 
-                left: 100%;
-                width: 0;
-            }
-        }
-
-        @keyframes blink {
-            from, to { border-right: 3px solid transparent; }
-            50% { border-right: 3px solid var(--primary); }
         }
 
         .hero p {
@@ -484,6 +486,275 @@
         .select-wrapper select {
             appearance: none;
             cursor: pointer;
+        }
+
+        /* Suggestions */
+        .suggestions {
+            position: absolute;
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: var(--card-shadow);
+            display: none;
+        }
+
+        .suggestions div {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .suggestions div:hover {
+            background: var(--light-gray);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        /* Form Styles */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-control.error {
+            border-color: var(--error);
+        }
+
+        .form-error {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-error.active {
+            display: block;
+        }
+
+        /* Emergency Button */
+        .btn-emergency {
+            background: linear-gradient(135deg, #ff4757, #ff3838);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 1rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-emergency:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.3);
+        }
+
+        /* Verification Badge */
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .verified {
+            background: var(--success);
+            color: white;
+        }
+
+        .pending {
+            background: var(--warning);
+            color: white;
+        }
+
+        .unverified {
+            background: var(--light-gray);
+            color: var(--gray);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid var(--light-gray);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2rem 1rem;
+            margin: 3rem 0;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Compatibility Table */
+        .compatibility-table {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--card-shadow);
+        }
+
+        .compatibility-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .compatibility-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .compatibility-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .compatibility-table tr:hover {
+            background: rgba(230, 57, 70, 0.05);
+        }
+
+        /* Donor Status */
+        .status-available {
+            color: var(--success);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-unavailable {
+            color: var(--warning);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         /* View Toggle */
@@ -789,11 +1060,6 @@
             gap: 10px;
         }
 
-        .footer-bottom img {
-            width: 35px;
-            height: 35px;
-        }
-
         .developer-info {
             display: flex;
             align-items: center;
@@ -805,71 +1071,6 @@
             animation: slideIn 0.8s ease forwards;
         }
 
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .developer-info img {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--primary);
-            position: relative;
-            animation: 
-                bounce 2s ease-in-out infinite,
-                borderPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes borderPulse {
-            0%, 100% { border-width: 2px; }
-            50% { border-width: 4px; }
-        }
-
-        .developer-info h4 {
-            color: white;
-            margin-bottom: 0.25rem;
-            overflow: hidden;
-            border-right: 3px solid var(--primary);
-            white-space: nowrap;
-            animation: 
-                typing 3.5s steps(40, end),
-                blink 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink {
-            from, to { border-color: transparent }
-            50% { border-color: var(--primary) }
-        }
-
-        .developer-info p {
-            color: #adb5bd;
-            font-size: 0.9rem;
-            animation: fadeInUp 0.8s ease 2s forwards;
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* Action Buttons Container */
         .action-buttons-container {
             display: flex;
@@ -877,6 +1078,41 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 2rem;
+        }
+
+        /* OTP Verification */
+        .otp-container {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 8px;
+        }
+
+        .otp-container.active {
+            display: block;
+        }
+
+        .otp-inputs {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            justify-content: center;
+        }
+
+        .otp-input {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 1.2rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .otp-input:focus {
+            border-color: var(--primary);
+            outline: none;
         }
 
         /* Mobile Responsive */
@@ -935,16 +1171,18 @@
                 align-items: center;
             }
 
-            .action-buttons-container .btn {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-
             .notification-container {
                 left: 20px;
                 right: 20px;
                 max-width: none;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -972,21 +1210,310 @@
             .data-table {
                 min-width: 600px;
             }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
     <!-- Notification Container -->
     <div class="notification-container" id="notificationContainer"></div>
+
+    <!-- Authentication Modal -->
+    <div class="auth-container" id="authContainer">
+        <div class="auth-box">
+            <button class="auth-close" onclick="closeAuth()">&times;</button>
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')" id="loginTab">Login</button>
+                <button class="auth-tab" onclick="switchAuthTab('register')" id="registerTab">Register</button>
+                <button class="auth-tab" onclick="switchAuthTab('forgot')" id="forgotTab">Forgot Password</button>
+            </div>
+            
+            <!-- Login Form -->
+            <div class="auth-content active" id="loginForm">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);" id="loginTitle">Login to Your Account</h3>
+                <form id="loginFormElement">
+                    <div class="form-group">
+                        <label class="form-label" id="emailLabel">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="passwordLabel">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem;">
+                        <i class="fas fa-sign-in-alt"></i> <span id="loginButtonText">Login</span>
+                    </button>
+                </form>
+                <div style="margin-top: 1rem; text-align: center;">
+                    <p style="color: var(--gray); font-size: 0.9rem;" id="adminNote">
+                        Admin? Login with: rovermdashfaq@gmail.com / Kingo01
+                    </p>
+                </div>
+            </div>
+
+            <!-- Register Form -->
+            <div class="auth-content" id="registerForm">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);" id="registerTitle">Create New Account</h3>
+                <form id="registerFormElement">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" id="fullNameLabel">Full Name</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" id="phoneLabel">Phone Number</label>
+                            <input type="tel" class="form-control" id="registerPhone" placeholder="+8801XXXXXXXXX" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="emailLabelRegister">Email Address</label>
+                        <input type="email" class="form-control" id="registerEmail" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" id="passwordLabelRegister">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" id="confirmPasswordLabel">Confirm Password</label>
+                            <input type="password" class="form-control" id="registerConfirmPassword" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="registerTerms" required>
+                            <span style="font-size: 0.9rem;" id="termsText">I agree to the terms and conditions</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem;">
+                        <i class="fas fa-user-plus"></i> <span id="createAccountText">Create Account</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div class="auth-content" id="forgotForm">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);" id="forgotTitle">Reset Password</h3>
+                <form id="forgotFormElement">
+                    <div class="form-group">
+                        <label class="form-label" id="forgotEmailLabel">Email Address</label>
+                        <input type="email" class="form-control" id="forgotEmail" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem;">
+                        <i class="fas fa-key"></i> <span id="sendResetText">Send Reset Link</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="registrationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> <span id="donorRegTitle">Register as Blood Donor</span></h3>
+                <button class="modal-close" onclick="closeModal('registrationModal')">&times;</button>
+            </div>
+            <form id="donorForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" id="fullNameLabelModal">Full Name *</label>
+                        <input type="text" class="form-control" id="donorName" required>
+                        <div class="form-error" id="nameError">Please enter your full name</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="emailLabelModal">Email Address *</label>
+                        <input type="email" class="form-control" id="donorEmail" required>
+                        <div class="form-error" id="emailError">Please enter a valid email</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" id="phoneLabelModal">Phone Number *</label>
+                        <input type="tel" class="form-control" id="donorPhone" required>
+                        <div class="form-error" id="phoneError">Please enter a valid phone number</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="bloodGroupLabelModal">Blood Group *</label>
+                        <select class="form-control" id="donorBloodGroup" required>
+                            <option value="">Select Blood Group</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                        <div class="form-error" id="bloodError">Please select your blood group</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" id="districtLabelModal">District *</label>
+                        <input type="text" class="form-control" id="donorDistrict" list="districtList" required>
+                        <datalist id="districtList">
+                            <option value="DHAKA">
+                            <option value="CHATTOGRAM">
+                            <option value="RAJSHAHI">
+                            <option value="KHULNA">
+                            <option value="BARISHAL">
+                            <option value="SYLHET">
+                            <option value="RANGPUR">
+                            <option value="MYMENSINGH">
+                        </datalist>
+                        <div class="form-error" id="districtError">Please enter your district</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="upazilaLabelModal">Upazila/Area *</label>
+                        <input type="text" class="form-control" id="donorUpazila" required>
+                        <div class="form-error" id="upazilaError">Please enter your upazila/area</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" id="lastDonationLabel">Last Donation Date</label>
+                    <input type="date" class="form-control" id="lastDonation">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" id="availabilityLabel">Are you available to donate now? *</label>
+                    <div style="display: flex; gap: 1rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="radio" name="availability" value="yes" checked> 
+                            <span id="availableYes">Yes, I'm available</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="radio" name="availability" value="no"> 
+                            <span id="availableNo">Not currently available</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" id="medicalInfoLabel">Any medical conditions we should know about?</label>
+                    <textarea class="form-control" id="medicalInfo" rows="3" placeholder="Optional"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.1rem;">
+                    <i class="fas fa-heart"></i> <span id="registerDonorButton">Register as Donor</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Emergency Modal -->
+    <div class="modal" id="emergencyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-bell"></i> <span id="emergencyTitle">Emergency Blood Request</span></h3>
+                <button class="modal-close" onclick="closeModal('emergencyModal')">&times;</button>
+            </div>
+            <form id="emergencyForm">
+                <div class="form-group">
+                    <label class="form-label" id="patientNameLabel">Patient Name *</label>
+                    <input type="text" class="form-control" id="patientName" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" id="emergencyBloodLabel">Blood Group Needed *</label>
+                        <select class="form-control" id="emergencyBloodGroup" required>
+                            <option value="">Select Blood Group</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="unitsRequiredLabel">Units Required *</label>
+                        <input type="number" class="form-control" id="unitsRequired" min="1" max="10" value="1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" id="hospitalNameLabel">Hospital Name *</label>
+                        <input type="text" class="form-control" id="hospitalName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="hospitalLocationLabel">Hospital Location *</label>
+                        <input type="text" class="form-control" id="hospitalLocation" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" id="contactPersonLabel">Contact Person *</label>
+                        <input type="text" class="form-control" id="contactPerson" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="emergencyPhoneLabel">Contact Phone *</label>
+                        <input type="tel" class="form-control" id="emergencyPhone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" id="urgencyLevelLabel">Urgency Level *</label>
+                    <select class="form-control" id="urgencyLevel" required>
+                        <option value="normal">Normal (Within 24 hours)</option>
+                        <option value="urgent">Urgent (Within 6 hours)</option>
+                        <option value="critical">Critical (Immediately)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" id="additionalInfoLabel">Additional Information</label>
+                    <textarea class="form-control" id="emergencyNotes" rows="3" placeholder="Any additional details..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-emergency" style="width: 100%;">
+                    <i class="fas fa-bell"></i> <span id="sendEmergencyButton">Send Emergency Request</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user"></i> <span id="profileTitle">My Profile</span></h3>
+                <button class="modal-close" onclick="closeModal('profileModal')">&times;</button>
+            </div>
+            <div id="profileContent">
+                <!-- Profile content will be loaded here -->
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header class="header">
         <div class="header-container">
             <a href="#" class="logo">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiX3OW5MKsXyEr_acEYrI53dUwJZiKIS9BhmLD3I4izx0zGNxnqsHFh68Qp1mWup-HB0ZZa-Oy2Nk1dmbclSZgho6e1605dbPiP6WGIQgsq-QIJM-_Wvd8dNDZcjmpbXwAjcw2hkuWuSRt_a7KqWYWMHfFclfQ2P4u7LhKNfKns0-eXMzm4WZNLhyphenhyphenNcphI/s1280/1000024555.png" alt="Logo" class="logo-img">
+                <!-- Logo image loaded from Firebase -->
+                <img id="logoImage" src="" alt="Logo" class="logo-img">
                 <div class="logo-text">
-                    <h1>Blood Donor BD</h1>
-                    <p>Save Lives, Donate Blood</p>
+                    <!-- Logo text loaded from Firebase -->
+                    <h1 id="logoTitle">Loading...</h1>
+                    <p id="logoTagline">Loading...</p>
                 </div>
             </a>
 
@@ -995,34 +1522,58 @@
             </button>
 
             <nav class="nav-links" id="navLinks">
-                <a href="#search" class="nav-link">Find Donors</a>
-                <a href="#about" class="nav-link">About Us</a>
-                <a href="#contact" class="nav-link">Contact</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc2AhG_yMIUFhyU53ExHePIZoun9qa0ldME2yuE1FJBZ7bTaw/viewform" target="_blank" class="btn btn-outline-green"><i class="fas fa-user-plus"></i>Register as Donor</a>
-                <a href="https://blooddonor-database.blogspot.com/2025/04/blood-donor-bd-body-font-family-segoe.html" target="_blank" class="btn btn-outline">
-                    <i class="fas fa-sign-in-alt"></i> Admin Login
+                <!-- Navigation links loaded from Firebase -->
+                <a href="#search" class="nav-link" id="navFindDonors">Find Donors</a>
+                <a href="#about" class="nav-link" id="navAboutUs">About Us</a>
+                <a href="#contact" class="nav-link" id="navContact">Contact</a>
+                
+                <!-- Admin Link -->
+                <a href="#" class="nav-link" id="adminLink" style="display: none;">
+                    <i class="fas fa-user-shield"></i> <span id="adminPanelText">Admin Panel</span>
                 </a>
+                
+                <!-- Auth Buttons -->
+                <span id="authButtons">
+                    <button class="btn btn-outline" onclick="openAuth()">
+                        <i class="fas fa-sign-in-alt"></i> <span id="loginNavText">Login</span>
+                    </button>
+                </span>
+                
+                <button class="btn btn-outline-green" onclick="openModal('registrationModal')">
+                    <i class="fas fa-user-plus"></i> <span id="registerDonorNavText">Register as Donor</span>
+                </button>
+                
+                <button class="btn btn-emergency" onclick="openModal('emergencyModal')">
+                    <i class="fas fa-bell"></i> <span id="emergencyNavText">Emergency</span>
+                </button>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="heroSection">
+        <!-- Background image loaded from Firebase -->
         <div class="hero-container">
-            <h1>Every Drop Counts, Every Donor Matters</h1>
-            <p>Find blood donors across Bangladesh when you need them most. Join thousands of life-savers in our mission.</p>
+            <h1 id="heroTitle">Loading...</h1>
+            <p id="heroDescription">Loading...</p>
+            
+            <button class="btn-emergency" onclick="openModal('emergencyModal')">
+                <i class="fas fa-bell" style="animation: pulse 1.5s infinite;"></i> 
+                <span id="emergencyCtaText">URGENT: Need Blood Now?</span>
+            </button>
+
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-number" id="totalDonors">1,250+</span>
-                    <span class="stat-label">Active Donors</span>
+                    <span class="stat-number" id="heroStat1">0</span>
+                    <span class="stat-label" id="heroStatLabel1">Active Donors</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number" id="totalDistricts">64</span>
-                    <span class="stat-label">Districts Covered</span>
+                    <span class="stat-number" id="heroStat2">0</span>
+                    <span class="stat-label" id="heroStatLabel2">Districts Covered</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number"id="livesSaved">500+</span>
-                    <span class="stat-label">Lives Saved</span>
+                    <span class="stat-number" id="heroStat3">0</span>
+                    <span class="stat-label" id="heroStatLabel3">Lives Saved</span>
                 </div>
             </div>
         </div>
@@ -1032,12 +1583,12 @@
     <main class="container">
         <!-- Search Section -->
         <section id="search" class="search-section">
-            <h2 class="section-title">Find Blood Donors</h2>
-            <p style="margin-bottom: 2rem; color: var(--gray);">Search our database of verified blood donors across Bangladesh</p>
+            <h2 class="section-title" id="searchTitle">Find Blood Donors</h2>
+            <p id="searchDescription" style="margin-bottom: 2rem; color: var(--gray);">Search our database of verified blood donors across Bangladesh</p>
 
             <div class="search-grid">
                 <div class="form-group">
-                    <label class="form-label">Blood Group</label>
+                    <label class="form-label" id="bloodGroupSearchLabel">Blood Group</label>
                     <div class="select-wrapper">
                         <select id="searchBlood" class="form-control">
                             <option value="">Any Blood Group</option>
@@ -1054,61 +1605,67 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">District</label>
+                    <label class="form-label" id="districtSearchLabel">District</label>
                     <input type="text" id="searchDistrict" class="form-control" placeholder="Enter district name">
                     <div id="districtSuggestions" class="suggestions"></div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Upazila/Area</label>
+                    <label class="form-label" id="upazilaSearchLabel">Upazila/Area</label>
                     <input type="text" id="searchUpazila" class="form-control" placeholder="Enter upazila name">
                     <div id="upazilaSuggestions" class="suggestions"></div>
                 </div>
             </div>
 
             <button onclick="searchDonors()" class="btn btn-primary" style="width: 100%; padding: 1rem;">
-                <i class="fas fa-search"></i> Search Donors
+                <i class="fas fa-search"></i> <span id="searchButtonText">Search Donors</span>
             </button>
             
             <!-- Action Buttons -->
             <div class="action-buttons-container">
                 <button onclick="copyToClipboard()" class="btn btn-outline">
-                    <i class="fas fa-copy"></i> Copy All Data
+                    <i class="fas fa-copy"></i> <span id="copyDataText">Copy All Data</span>
                 </button>
                 <button onclick="downloadCSV()" class="btn btn-outline">
-                    <i class="fas fa-file-csv"></i> Export as CSV
+                    <i class="fas fa-file-csv"></i> <span id="exportCsvText">Export as CSV</span>
                 </button>
                 <button onclick="downloadPDF()" class="btn btn-outline">
-                    <i class="fas fa-file-pdf"></i> Export as PDF
+                    <i class="fas fa-file-pdf"></i> <span id="exportPdfText">Export as PDF</span>
                 </button>
                 <button onclick="clearSearch()" class="btn btn-outline">
-                    <i class="fas fa-redo"></i> Clear Search
+                    <i class="fas fa-redo"></i> <span id="clearSearchText">Clear Search</span>
                 </button>
+            </div>
+        </section>
+        
+        <!-- Compatibility Table -->
+        <section class="compatibility-table">
+            <h2 class="section-title" id="compatibilityTitle">Blood Type Compatibility</h2>
+            <div style="overflow-x: auto;">
+                <table id="compatibilityTable">
+                    <!-- Table content loaded from Firebase -->
+                </table>
             </div>
         </section>
         
         <!-- View Toggle -->
         <div class="view-toggle">
             <button class="view-btn" id="tableViewBtn" onclick="showTableView()">
-                <i class="fas fa-table"></i> Table View
+                <i class="fas fa-table"></i> <span id="tableViewText">Table View</span>
             </button>
             <button class="view-btn active" id="cardViewBtn" onclick="showCardView()">
-                <i class="fas fa-th-large"></i> Card View
+                <i class="fas fa-th-large"></i> <span id="cardViewText">Card View</span>
             </button>
         </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="spinner" style="display: none;"></div>
 
         <!-- Table View -->
         <div class="table-container" id="tableView">
             <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Blood Group</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>District</th>
-                        <th>Upazila</th>
-                        <th>Registration Date</th>
-                    </tr>
+                <thead id="tableHeaders">
+                    <!-- Table headers loaded from Firebase -->
                 </thead>
                 <tbody id="donorTableBody">
                     <!-- Data will be populated here -->
@@ -1120,6 +1677,28 @@
         <div class="cards-container active" id="cardView">
             <!-- Cards will be populated here -->
         </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" id="availableDonors">0</div>
+                    <div class="stat-text" id="availableNowText">Available Now</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalRegistrations">0</div>
+                    <div class="stat-text" id="totalRegistrationsText">Total Registrations</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="responseTime">30min</div>
+                    <div class="stat-text" id="responseTimeText">Average Response Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="freeService">100%</div>
+                    <div class="stat-text" id="freeServiceText">Free Service</div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -1127,60 +1706,45 @@
         <div class="footer-container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Blood Donor BD</h3>
-                    <p>Connecting blood donors with those in need across Bangladesh. Your single donation can save up to three lives. Join our mission today.</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/share/1getnhDs55/" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.facebook.com/groups/566092693108418/?ref=share&mibextid=NSMWBT" class="social-link" target="_blank"><i class="fas fa-users"></i></a>
+                    <h3 id="footerTitle">Blood Donor BD</h3>
+                    <p id="footerDescription">Connecting blood donors with those in need across Bangladesh. Your single donation can save up to three lives. Join our mission today.</p>
+                    <div class="social-links" id="socialLinks">
+                        <!-- Social links loaded from Firebase -->
                     </div>
                 </div>
 
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="#search"><i class="fas fa-search"></i> Find Donors</a></li>
-                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc2AhG_yMIUFhyU53ExHePIZoun9qa0ldME2yuE1FJBZ7bTaw/viewform" target="_blank"><i class="fas fa-user-plus"></i> Register as Donor</a></li>
-                        <li><a href="https://blooddonor-database.blogspot.com/2025/04/blood-donor-bd-body-font-family-segoe.html" target="_blank"><i class="fas fa-sign-in-alt"></i> Admin Login</a></li>
+                    <h3 id="quickLinksTitle">Quick Links</h3>
+                    <ul class="footer-links" id="quickLinks">
+                        <!-- Quick links loaded from Firebase -->
                     </ul>
                 </div>
 
                <section id="contact">
                 <div class="footer-section">
-                    <h3>Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><a href="mailto:blooddonorbd25@gmail.com"><i class="fas fa-envelope"></i> blooddonorbd25@gmail.com</a></li>
-                        <li><a href="https://wa.me/qr/3ITBKA5Y5SUSI1"><i class="fas fa-phone"></i> Emergency Contact</a></li>
-                        <li><a href="https://maps.app.goo.gl/hgouFTQoppKvKF7p6"><i class="fas fa-map-marker-alt"></i> Bangladesh</a></li>
+                    <h3 id="contactTitle">Contact Info</h3>
+                    <ul class="footer-links" id="contactLinks">
+                        <!-- Contact links loaded from Firebase -->
                     </ul>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/MD.Ashfaq01" class="social-link" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/md.ashfaq01" class="social-link" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@mdashfaq.king?_t=ZS-8zQHzCpJy9H&_r=1" class="social-link" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://x.com/Mart_Ashfaq" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.linkedin.com/in/md-ashfaqur-rahman-tanim-407805290" class="social-link" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.youtube.com/@md.ashfaq01" class="social-link" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="https://rovermdashfaq.github.io/portfolio/" class="social-link" target="_blank" title="Blogger"><i class="fas fa-blog"></i></a>
+                    <div class="social-links" id="developerSocialLinks">
+                        <!-- Developer social links loaded from Firebase -->
                     </div>
                 </div>
             </div>
             </section>
 
-            <div class="developer-info" style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 13px;">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCDeXufBywGlGcvjFv5OaZNnGnIFboYZgUyo9NPcDt7SH5dWhG6Kv7wOtGMm5uBfA-2RCI41U0IWscQhEPQ9_6mHg192N68FaFDDE4HIfb8zXw6Ubafj329ToS6mYTqHo8Wu8aRidwjczDQZ4Id_t7K-E32b8ZthoHTIH3r86pWwfOmFdNvgcQOOeHBDc/s2000/1000038033.png" alt="Developer" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-                <div style="text-align: center;">
-                    <h4 style="color: white; margin-bottom: 0.25rem;">Md. Ashfaqur Rahman Tanim</h4>
-                    <p style="color: #adb5bd; font-size: 0.9rem;">Full Stack Developer</p>
-                </div>
+            <div class="developer-info" id="developerInfo">
+                <!-- Developer info loaded from Firebase -->
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> Blood Donor BD. All rights reserved.</p>
+                <p id="copyrightText">&copy; <span id="currentYear"></span> Blood Donor BD. All rights reserved.</p>
+                <p id="poweredByText" style="font-size: 0.8rem; color: #888;">Powered by Firebase • Real-time Database</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Main JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         // Global variables
@@ -1188,88 +1752,1098 @@
         let uniqueDistricts = new Set();
         let uniqueUpazilas = new Set();
         let currentView = 'card';
+        let unsubscribeDonors = null;
+        let unsubscribeContent = null;
+        let db, auth, storage;
+        let currentUser = null;
+        let userData = null;
+        let isAdmin = false;
+        let websiteContent = {};
 
-        // Notification system
-        function showNotification(type, title, message, duration = 3000) {
-            const container = document.getElementById('notificationContainer');
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            
-            let icon = 'fa-info-circle';
-            switch(type) {
-                case 'success': icon = 'fa-check-circle'; break;
-                case 'error': icon = 'fa-exclamation-circle'; break;
-                case 'warning': icon = 'fa-exclamation-triangle'; break;
-                case 'info': icon = 'fa-info-circle'; break;
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDtRsYuROi6qBsPQw0dzEX2YeV_dTwoaR8",
+            authDomain: "blood-donor-6526b.firebaseapp.com",
+            databaseURL: "https://blood-donor-6526b-default-rtdb.firebaseio.com",
+            projectId: "blood-donor-6526b",
+            storageBucket: "blood-donor-6526b.firebasestorage.app",
+            messagingSenderId: "615824019476",
+            appId: "1:615824019476:web:25849742225a93a44e5701"
+        };
+
+        // Admin emails list
+        const ADMIN_EMAILS = ['rovermdashfaq@gmail.com'];
+
+        // Initialize Firebase
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Initialize Firebase
+                if (!firebase.apps.length) {
+                    firebase.initializeApp(firebaseConfig);
+                }
+                db = firebase.firestore();
+                auth = firebase.auth();
+                storage = firebase.storage();
+                
+                console.log("Firebase initialized successfully");
+                
+                // Set current year
+                document.getElementById('currentYear').textContent = new Date().getFullYear();
+                
+                // Mobile menu toggle
+                document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                    document.getElementById('navLinks').classList.toggle('active');
+                    document.getElementById('mobileMenuBtn').classList.toggle('active');
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('#navLinks') && !e.target.closest('#mobileMenuBtn')) {
+                        document.getElementById('navLinks').classList.remove('active');
+                        document.getElementById('mobileMenuBtn').classList.remove('active');
+                    }
+                });
+
+                // Initialize forms
+                initializeForms();
+                
+                // Setup auth state listener
+                setupAuthStateListener();
+                
+                // Setup admin link
+                document.getElementById('adminLink').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openAdminPanel();
+                });
+                
+                // Load website content first
+                await loadWebsiteContent();
+                
+                // Then fetch initial data
+                await initializeFirebaseData();
+                
+            } catch (error) {
+                console.error('Error initializing Firebase:', error);
+                showNotification('error', 'Firebase Error', 'Failed to initialize Firebase. Please check console.');
             }
-            
-            notification.innerHTML = `
-                <i class="fas ${icon}"></i>
-                <div class="notification-content">
-                    <div class="notification-title">${title}</div>
-                    <div class="notification-message">${message}</div>
-                </div>
-                <button class="notification-close" onclick="this.parentElement.remove()">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            
-            container.appendChild(notification);
-            
-            // Auto remove after duration
-            setTimeout(() => {
-                if (notification.parentElement) {
-                    notification.style.animation = 'slideOut 0.3s ease forwards';
-                    setTimeout(() => notification.remove(), 300);
-                }
-            }, duration);
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set current year
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // Mobile menu toggle
-            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-                document.getElementById('navLinks').classList.toggle('active');
-            });
-
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('#navLinks') && !e.target.closest('#mobileMenuBtn')) {
-                    document.getElementById('navLinks').classList.remove('active');
-                }
-            });
-
-            // Fetch data
-            fetchDonors();
-            fetchStatistics();
         });
 
-        // Fetch donor data
-        async function fetchDonors() {
-            showNotification('info', 'Loading', 'Fetching donor data...');
-            const sheetURL = 'https://docs.google.com/spreadsheets/d/1p3LQrm9pfvewDNXGZ5sIN_a6hwfbn4AqBcwp8eGPibQ/export?format=tsv';
+        // Load all website content from Firebase
+        async function loadWebsiteContent() {
+            try {
+                showNotification('info', 'Loading', 'Loading website content...');
+                
+                // Load from 'website_content' collection
+                const contentSnapshot = await db.collection('website_content').get();
+                
+                if (!contentSnapshot.empty) {
+                    contentSnapshot.forEach(doc => {
+                        const data = doc.data();
+                        const id = doc.id;
+                        
+                        // Store in websiteContent object
+                        websiteContent[id] = data;
+                        
+                        // Update specific elements based on ID
+                        updateContentElement(id, data);
+                    });
+                    
+                    console.log('Website content loaded:', websiteContent);
+                    showNotification('success', 'Content Loaded', 'Website content loaded successfully');
+                } else {
+                    console.log('No website content found, using defaults');
+                    // Create default content
+                    createDefaultWebsiteContent();
+                }
+                
+                // Setup real-time listener for content updates
+                setupContentRealtimeListener();
+                
+            } catch (error) {
+                console.error('Error loading website content:', error);
+                showNotification('error', 'Content Error', 'Failed to load website content');
+                // Use default values
+                createDefaultWebsiteContent();
+            }
+        }
+
+        // Update specific content elements
+        function updateContentElement(elementId, content) {
+            const element = document.getElementById(elementId);
+            
+            if (!element) {
+                console.log(`Element ${elementId} not found`);
+                return;
+            }
+            
+            // Handle different types of content
+            if (content.type === 'text') {
+                element.textContent = content.value || '';
+            } else if (content.type === 'html') {
+                element.innerHTML = content.value || '';
+            } else if (content.type === 'image') {
+                if (content.value) {
+                    element.src = content.value;
+                    if (content.alt) element.alt = content.alt;
+                }
+            } else if (content.type === 'link') {
+                if (content.href) element.href = content.href;
+                if (content.text) element.textContent = content.text;
+            } else if (content.type === 'meta') {
+                element.setAttribute('content', content.value || '');
+            } else if (content.type === 'array') {
+                // Handle arrays (like social links, quick links)
+                if (elementId === 'socialLinks' || elementId === 'developerSocialLinks') {
+                    updateSocialLinks(element, content.items || []);
+                } else if (elementId === 'quickLinks' || elementId === 'contactLinks') {
+                    updateLinkList(element, content.items || []);
+                } else if (elementId === 'compatibilityTable') {
+                    updateCompatibilityTable(element, content.items || []);
+                } else if (elementId === 'tableHeaders') {
+                    updateTableHeaders(element, content.items || []);
+                }
+            } else if (content.type === 'hero') {
+                updateHeroSection(content);
+            } else if (content.type === 'developer') {
+                updateDeveloperInfo(content);
+            } else if (content.type === 'stats') {
+                updateStatsBar(content);
+            }
+        }
+
+        // Update social links
+        function updateSocialLinks(container, links) {
+            container.innerHTML = '';
+            links.forEach(link => {
+                const socialLink = document.createElement('a');
+                socialLink.className = 'social-link';
+                socialLink.href = link.href || '#';
+                if (link.target) socialLink.target = link.target;
+                if (link.title) socialLink.title = link.title;
+                
+                const icon = document.createElement('i');
+                icon.className = link.icon || 'fab fa-link';
+                socialLink.appendChild(icon);
+                
+                container.appendChild(socialLink);
+            });
+        }
+
+        // Update link list
+        function updateLinkList(container, links) {
+            container.innerHTML = '';
+            links.forEach(link => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = link.href || '#';
+                a.textContent = link.text || 'Link';
+                
+                if (link.icon) {
+                    const icon = document.createElement('i');
+                    icon.className = link.icon;
+                    a.prepend(icon);
+                    a.prepend(' ');
+                }
+                
+                if (link.onclick) {
+                    a.onclick = new Function(link.onclick);
+                }
+                
+                li.appendChild(a);
+                container.appendChild(li);
+            });
+        }
+
+        // Update compatibility table
+        function updateCompatibilityTable(table, rows) {
+            let tableHTML = `
+                <thead>
+                    <tr>
+                        <th>Your Blood Type</th>
+                        <th>Can Donate To</th>
+                        <th>Can Receive From</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+            
+            rows.forEach(row => {
+                tableHTML += `
+                    <tr>
+                        <td><strong>${row.bloodType}</strong></td>
+                        <td>${row.canDonateTo}</td>
+                        <td>${row.canReceiveFrom}</td>
+                    </tr>
+                `;
+            });
+            
+            tableHTML += '</tbody>';
+            table.innerHTML = tableHTML;
+        }
+
+        // Update table headers
+        function updateTableHeaders(thead, headers) {
+            let headerHTML = '<tr>';
+            headers.forEach(header => {
+                headerHTML += `<th>${header}</th>`;
+            });
+            headerHTML += '</tr>';
+            thead.innerHTML = headerHTML;
+        }
+
+        // Update hero section
+        function updateHeroSection(content) {
+            const heroSection = document.getElementById('heroSection');
+            if (content.backgroundImage) {
+                heroSection.style.backgroundImage = `linear-gradient(135deg, rgba(230, 57, 70, 0.9), rgba(45, 106, 79, 0.9)), url('${content.backgroundImage}')`;
+            }
+            
+            if (content.title) document.getElementById('heroTitle').textContent = content.title;
+            if (content.description) document.getElementById('heroDescription').textContent = content.description;
+            if (content.ctaText) document.getElementById('emergencyCtaText').textContent = content.ctaText;
+            
+            // Update stats
+            if (content.stats) {
+                const stats = content.stats;
+                if (stats[0]) {
+                    document.getElementById('heroStat1').textContent = stats[0].value;
+                    document.getElementById('heroStatLabel1').textContent = stats[0].label;
+                }
+                if (stats[1]) {
+                    document.getElementById('heroStat2').textContent = stats[1].value;
+                    document.getElementById('heroStatLabel2').textContent = stats[1].label;
+                }
+                if (stats[2]) {
+                    document.getElementById('heroStat3').textContent = stats[2].value;
+                    document.getElementById('heroStatLabel3').textContent = stats[2].label;
+                }
+            }
+        }
+
+        // Update developer info
+        function updateDeveloperInfo(content) {
+            const container = document.getElementById('developerInfo');
+            if (!container) return;
+            
+            container.innerHTML = `
+                <img src="${content.avatar || 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCDeXufBywGlGcvjFv5OaZNnGnIFboYZgUyo9NPcDt7SH5dWhG6Kv7wOtGMm5uBfA-2RCI41U0IWscQhEPQ9_6mHg192N68FaFDDE4HIfb8zXw6Ubafj329ToS6mYTqHo8Wu8aRidwjczDQZ4Id_t7K-E32b8ZthoHTIH3r86pWwfOmFdNvgcQOOeHBDc/s2000/1000038033.png'}" 
+                     alt="${content.name || 'Developer'}" 
+                     style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                <div style="text-align: center;">
+                    <h4 style="color: white; margin-bottom: 0.25rem;">${content.name || 'Md. Ashfaqur Rahman Tanim'}</h4>
+                    <p style="color: #adb5bd; font-size: 0.9rem;">${content.role || 'Full Stack Developer'}</p>
+                </div>
+            `;
+        }
+
+        // Update stats bar
+        function updateStatsBar(content) {
+            if (content.availableNow) {
+                document.getElementById('availableDonors').textContent = content.availableNow.value;
+                document.getElementById('availableNowText').textContent = content.availableNow.label;
+            }
+            if (content.totalRegistrations) {
+                document.getElementById('totalRegistrations').textContent = content.totalRegistrations.value;
+                document.getElementById('totalRegistrationsText').textContent = content.totalRegistrations.label;
+            }
+            if (content.responseTime) {
+                document.getElementById('responseTime').textContent = content.responseTime.value;
+                document.getElementById('responseTimeText').textContent = content.responseTime.label;
+            }
+            if (content.freeService) {
+                document.getElementById('freeService').textContent = content.freeService.value;
+                document.getElementById('freeServiceText').textContent = content.freeService.label;
+            }
+        }
+
+        // Create default website content (fallback)
+        function createDefaultWebsiteContent() {
+            const defaults = {
+                'pageTitle': { type: 'text', value: 'Blood Donor BD | Save Lives Through Blood Donation' },
+                'metaDescription': { type: 'meta', value: 'Blood Donor BD: Find blood donors across Bangladesh and register to save lives. Search by blood group, district, and upazila.' },
+                'metaKeywords': { type: 'meta', value: 'blood donation, blood donor, Bangladesh, save lives, blood group, donor search, register donor, emergency blood' },
+                'metaAuthor': { type: 'meta', value: 'Md. Ashfaqur Rahman Tanim' },
+                'favicon': { type: 'image', value: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGzmqmCMyzrBJMdG52j5GArNY0ZuFlJoRYt1rJRvQNI_2gNygYjcF0XD_TNmG_QNyMrbDpF2O0gR4krGqxiwirJ-UWiie-iPAmq-OUfRc-RUqTHZkJpXaN_r0ePOmNcZLQdt1XHx6gWVLTeifm-OQlSUUJtvUsHwe7Kok9TPVpAP-F7jLbOMCvfi3hs_8/s675/1000003291.jpg' },
+                'logoImage': { type: 'image', value: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGzmqmCMyzrBJMdG52j5GArNY0ZuFlJoRYt1rJRvQNI_2gNygYjcF0XD_TNmG_QNyMrbDpF2O0gR4krGqxiwirJ-UWiie-iPAmq-OUfRc-RUqTHZkJpXaN_r0ePOmNcZLQdt1XHx6gWVLTeifm-OQlSUUJtvUsHwe7Kok9TPVpAP-F7jLbOMCvfi3hs_8/s675/1000003291.jpg', alt: 'Blood Donor BD Logo' },
+                'logoTitle': { type: 'text', value: 'Blood Donor BD' },
+                'logoTagline': { type: 'text', value: 'Save Lives, Donate Blood' },
+                'navFindDonors': { type: 'text', value: 'Find Donors' },
+                'navAboutUs': { type: 'text', value: 'About Us' },
+                'navContact': { type: 'text', value: 'Contact' },
+                'adminPanelText': { type: 'text', value: 'Admin Panel' },
+                'loginNavText': { type: 'text', value: 'Login' },
+                'registerDonorNavText': { type: 'text', value: 'Register as Donor' },
+                'emergencyNavText': { type: 'text', value: 'Emergency' },
+                'heroTitle': { type: 'text', value: 'Every Drop Counts, Every Donor Matters' },
+                'heroDescription': { type: 'text', value: 'Find blood donors across Bangladesh when you need them most. Join thousands of life-savers in our mission.' },
+                'emergencyCtaText': { type: 'text', value: 'URGENT: Need Blood Now?' },
+                'heroStat1': { type: 'text', value: '1,250+' },
+                'heroStatLabel1': { type: 'text', value: 'Active Donors' },
+                'heroStat2': { type: 'text', value: '64' },
+                'heroStatLabel2': { type: 'text', value: 'Districts Covered' },
+                'heroStat3': { type: 'text', value: '500+' },
+                'heroStatLabel3': { type: 'text', value: 'Lives Saved' },
+                'searchTitle': { type: 'text', value: 'Find Blood Donors' },
+                'searchDescription': { type: 'text', value: 'Search our database of verified blood donors across Bangladesh' },
+                'bloodGroupSearchLabel': { type: 'text', value: 'Blood Group' },
+                'districtSearchLabel': { type: 'text', value: 'District' },
+                'upazilaSearchLabel': { type: 'text', value: 'Upazila/Area' },
+                'searchButtonText': { type: 'text', value: 'Search Donors' },
+                'copyDataText': { type: 'text', value: 'Copy All Data' },
+                'exportCsvText': { type: 'text', value: 'Export as CSV' },
+                'exportPdfText': { type: 'text', value: 'Export as PDF' },
+                'clearSearchText': { type: 'text', value: 'Clear Search' },
+                'compatibilityTitle': { type: 'text', value: 'Blood Type Compatibility' },
+                'compatibilityTable': {
+                    type: 'array',
+                    items: [
+                        { bloodType: 'A+', canDonateTo: 'A+, AB+', canReceiveFrom: 'A+, A-, O+, O-' },
+                        { bloodType: 'A-', canDonateTo: 'A+, A-, AB+, AB-', canReceiveFrom: 'A-, O-' },
+                        { bloodType: 'B+', canDonateTo: 'B+, AB+', canReceiveFrom: 'B+, B-, O+, O-' },
+                        { bloodType: 'B-', canDonateTo: 'B+, B-, AB+, AB-', canReceiveFrom: 'B-, O-' },
+                        { bloodType: 'AB+', canDonateTo: 'AB+', canReceiveFrom: 'Everyone (Universal Recipient)' },
+                        { bloodType: 'AB-', canDonateTo: 'AB+, AB-', canReceiveFrom: 'A-, B-, AB-, O-' },
+                        { bloodType: 'O+', canDonateTo: 'O+, A+, B+, AB+', canReceiveFrom: 'O+, O-' },
+                        { bloodType: 'O-', canDonateTo: 'Everyone (Universal Donor)', canReceiveFrom: 'O-' }
+                    ]
+                },
+                'tableViewText': { type: 'text', value: 'Table View' },
+                'cardViewText': { type: 'text', value: 'Card View' },
+                'tableHeaders': {
+                    type: 'array',
+                    items: ['Blood Group', 'Email', 'Phone', 'District', 'Upazila', 'Registration Date']
+                },
+                'availableDonors': { type: 'text', value: '0' },
+                'availableNowText': { type: 'text', value: 'Available Now' },
+                'totalRegistrations': { type: 'text', value: '0' },
+                'totalRegistrationsText': { type: 'text', value: 'Total Registrations' },
+                'responseTime': { type: 'text', value: '30min' },
+                'responseTimeText': { type: 'text', value: 'Average Response Time' },
+                'freeService': { type: 'text', value: '100%' },
+                'freeServiceText': { type: 'text', value: 'Free Service' },
+                'footerTitle': { type: 'text', value: 'Blood Donor BD' },
+                'footerDescription': { type: 'text', value: 'Connecting blood donors with those in need across Bangladesh. Your single donation can save up to three lives. Join our mission today.' },
+                'socialLinks': {
+                    type: 'array',
+                    items: [
+                        { href: 'https://www.facebook.com/share/1getnhDs55/', icon: 'fab fa-facebook-f', target: '_blank' },
+                        { href: 'https://www.facebook.com/groups/566092693108418/?ref=share&mibextid=NSMWBT', icon: 'fas fa-users', target: '_blank' }
+                    ]
+                },
+                'quickLinksTitle': { type: 'text', value: 'Quick Links' },
+                'quickLinks': {
+                    type: 'array',
+                    items: [
+                        { href: '#', text: 'Home', icon: 'fas fa-home' },
+                        { href: '#search', text: 'Find Donors', icon: 'fas fa-search' },
+                        { href: '#', text: 'Register as Donor', icon: 'fas fa-user-plus', onclick: "openModal('registrationModal')" },
+                        { href: '#', text: 'Emergency Request', icon: 'fas fa-bell', onclick: "openModal('emergencyModal')" }
+                    ]
+                },
+                'contactTitle': { type: 'text', value: 'Contact Info' },
+                'contactLinks': {
+                    type: 'array',
+                    items: [
+                        { href: 'mailto:blooddonorbd25@gmail.com', text: 'blooddonorbd25@gmail.com', icon: 'fas fa-envelope' },
+                        { href: 'https://wa.me/qr/3ITBKA5Y5SUSI1', text: 'Emergency Contact', icon: 'fas fa-phone' },
+                        { href: 'https://maps.app.goo.gl/hgouFTQoppKvKF7p6', text: 'Bangladesh', icon: 'fas fa-map-marker-alt' }
+                    ]
+                },
+                'developerSocialLinks': {
+                    type: 'array',
+                    items: [
+                        { href: 'https://www.facebook.com/MD.Ashfaq01', icon: 'fab fa-facebook-f', target: '_blank', title: 'Facebook' },
+                        { href: 'https://www.instagram.com/md.ashfaq01', icon: 'fab fa-instagram', target: '_blank', title: 'Instagram' },
+                        { href: 'https://www.tiktok.com/@mdashfaq.king?_t=ZS-8zQHzCpJy9H&_r=1', icon: 'fab fa-tiktok', target: '_blank', title: 'TikTok' },
+                        { href: 'https://x.com/Mart_Ashfaq', icon: 'fab fa-twitter' },
+                        { href: 'https://www.linkedin.com/in/md-ashfaqur-rahman-tanim-407805290', icon: 'fab fa-linkedin-in', target: '_blank', title: 'LinkedIn' },
+                        { href: 'https://www.youtube.com/@md.ashfaq01', icon: 'fab fa-youtube', target: '_blank', title: 'YouTube' },
+                        { href: 'https://rovermdashfaq.github.io/portfolio/', icon: 'fas fa-blog', target: '_blank', title: 'Blogger' }
+                    ]
+                },
+                'developerInfo': {
+                    type: 'developer',
+                    name: 'Md. Ashfaqur Rahman Tanim',
+                    role: 'Full Stack Developer',
+                    avatar: 'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCDeXufBywGlGcvjFv5OaZNnGnIFboYZgUyo9NPcDt7SH5dWhG6Kv7wOtGMm5uBfA-2RCI41U0IWscQhEPQ9_6mHg192N68FaFDDE4HIfb8zXw6Ubafj329ToS6mYTqHo8Wu8aRidwjczDQZ4Id_t7K-E32b8ZthoHTIH3r86pWwfOmFdNvgcQOOeHBDc/s2000/1000038033.png'
+                },
+                'copyrightText': { type: 'text', value: '© 2024 Blood Donor BD. All rights reserved.' },
+                'poweredByText': { type: 'text', value: 'Powered by Firebase • Real-time Database' },
+                'loginTab': { type: 'text', value: 'Login' },
+                'registerTab': { type: 'text', value: 'Register' },
+                'forgotTab': { type: 'text', value: 'Forgot Password' },
+                'loginTitle': { type: 'text', value: 'Login to Your Account' },
+                'emailLabel': { type: 'text', value: 'Email' },
+                'passwordLabel': { type: 'text', value: 'Password' },
+                'loginButtonText': { type: 'text', value: 'Login' },
+                'adminNote': { type: 'text', value: 'Admin? Login with: rovermdashfaq@gmail.com / Kingo01' },
+                'registerTitle': { type: 'text', value: 'Create New Account' },
+                'fullNameLabel': { type: 'text', value: 'Full Name' },
+                'phoneLabel': { type: 'text', value: 'Phone Number' },
+                'emailLabelRegister': { type: 'text', value: 'Email Address' },
+                'passwordLabelRegister': { type: 'text', value: 'Password' },
+                'confirmPasswordLabel': { type: 'text', value: 'Confirm Password' },
+                'termsText': { type: 'text', value: 'I agree to the terms and conditions' },
+                'createAccountText': { type: 'text', value: 'Create Account' },
+                'forgotTitle': { type: 'text', value: 'Reset Password' },
+                'forgotEmailLabel': { type: 'text', value: 'Email Address' },
+                'sendResetText': { type: 'text', value: 'Send Reset Link' },
+                'donorRegTitle': { type: 'text', value: 'Register as Blood Donor' },
+                'fullNameLabelModal': { type: 'text', value: 'Full Name *' },
+                'emailLabelModal': { type: 'text', value: 'Email Address *' },
+                'phoneLabelModal': { type: 'text', value: 'Phone Number *' },
+                'bloodGroupLabelModal': { type: 'text', value: 'Blood Group *' },
+                'districtLabelModal': { type: 'text', value: 'District *' },
+                'upazilaLabelModal': { type: 'text', value: 'Upazila/Area *' },
+                'lastDonationLabel': { type: 'text', value: 'Last Donation Date' },
+                'availabilityLabel': { type: 'text', value: 'Are you available to donate now? *' },
+                'availableYes': { type: 'text', value: 'Yes, I\'m available' },
+                'availableNo': { type: 'text', value: 'Not currently available' },
+                'medicalInfoLabel': { type: 'text', value: 'Any medical conditions we should know about?' },
+                'registerDonorButton': { type: 'text', value: 'Register as Donor' },
+                'emergencyTitle': { type: 'text', value: 'Emergency Blood Request' },
+                'patientNameLabel': { type: 'text', value: 'Patient Name *' },
+                'emergencyBloodLabel': { type: 'text', value: 'Blood Group Needed *' },
+                'unitsRequiredLabel': { type: 'text', value: 'Units Required *' },
+                'hospitalNameLabel': { type: 'text', value: 'Hospital Name *' },
+                'hospitalLocationLabel': { type: 'text', value: 'Hospital Location *' },
+                'contactPersonLabel': { type: 'text', value: 'Contact Person *' },
+                'emergencyPhoneLabel': { type: 'text', value: 'Contact Phone *' },
+                'urgencyLevelLabel': { type: 'text', value: 'Urgency Level *' },
+                'additionalInfoLabel': { type: 'text', value: 'Additional Information' },
+                'sendEmergencyButton': { type: 'text', value: 'Send Emergency Request' },
+                'profileTitle': { type: 'text', value: 'My Profile' }
+            };
+
+            // Apply defaults
+            Object.keys(defaults).forEach(key => {
+                websiteContent[key] = defaults[key];
+                updateContentElement(key, defaults[key]);
+            });
+        }
+
+        // Setup real-time listener for content updates
+        function setupContentRealtimeListener() {
+            unsubscribeContent = db.collection('website_content').onSnapshot((snapshot) => {
+                snapshot.docChanges().forEach(change => {
+                    const id = change.doc.id;
+                    const data = change.doc.data();
+                    
+                    if (change.type === 'added' || change.type === 'modified') {
+                        websiteContent[id] = data;
+                        updateContentElement(id, data);
+                        
+                        if (change.type === 'modified') {
+                            showNotification('info', 'Content Updated', `"${id}" has been updated`);
+                        }
+                    } else if (change.type === 'removed') {
+                        delete websiteContent[id];
+                        // Reset to default if available
+                        if (defaultContent && defaultContent[id]) {
+                            updateContentElement(id, defaultContent[id]);
+                        }
+                    }
+                });
+            }, (error) => {
+                console.error('Content real-time listener error:', error);
+            });
+        }
+
+        // Initialize forms
+        function initializeForms() {
+            // Login form
+            document.getElementById('loginFormElement').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await loginUser();
+            });
+
+            // Register form
+            document.getElementById('registerFormElement').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await registerUser();
+            });
+
+            // Forgot password form
+            document.getElementById('forgotFormElement').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await resetPassword();
+            });
+
+            // Donor registration form
+            document.getElementById('donorForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await registerDonor();
+            });
+
+            // Emergency form
+            document.getElementById('emergencyForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await submitEmergencyRequest();
+            });
+        }
+
+        // Setup authentication state listener
+        function setupAuthStateListener() {
+            auth.onAuthStateChanged(async (user) => {
+                currentUser = user;
+                
+                if (user) {
+                    console.log('User logged in:', user.email);
+                    
+                    // Check if user is admin
+                    isAdmin = ADMIN_EMAILS.includes(user.email);
+                    
+                    // Update UI
+                    updateAuthUI(user, isAdmin);
+                    
+                    // Load user data
+                    await loadUserData(user.uid);
+                    
+                } else {
+                    console.log('User logged out');
+                    updateAuthUI(null, false);
+                }
+            });
+        }
+
+        // Update authentication UI
+        function updateAuthUI(user, admin) {
+            const authButtons = document.getElementById('authButtons');
+            const adminLink = document.getElementById('adminLink');
+            
+            if (user) {
+                authButtons.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <button class="btn btn-primary" onclick="openProfileModal()">
+                            <i class="fas fa-user"></i> Profile
+                        </button>
+                        <button class="btn btn-outline" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                `;
+                
+                // Show admin link if admin
+                if (adminLink) {
+                    adminLink.style.display = admin ? 'inline-flex' : 'none';
+                }
+                
+                // Show admin badge in profile
+                if (admin) {
+                    showNotification('info', 'Admin Access', 'You have administrator privileges');
+                }
+                
+            } else {
+                authButtons.innerHTML = `
+                    <button class="btn btn-outline" onclick="openAuth()">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                `;
+                
+                if (adminLink) {
+                    adminLink.style.display = 'none';
+                }
+            }
+        }
+
+        // Load user data
+        async function loadUserData(uid) {
+            try {
+                const userDoc = await db.collection('users').doc(uid).get();
+                
+                if (userDoc.exists) {
+                    userData = userDoc.data();
+                    
+                    // Check if user has donor profile
+                    const donorDoc = await db.collection('donors')
+                        .where('userId', '==', uid)
+                        .limit(1)
+                        .get();
+                    
+                    if (!donorDoc.empty) {
+                        userData.donorProfile = donorDoc.docs[0].data();
+                        userData.donorId = donorDoc.docs[0].id;
+                    }
+                    
+                    console.log('User data loaded:', userData);
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+
+        // Open profile modal
+        async function openProfileModal() {
+            if (!currentUser) {
+                showNotification('error', 'Authentication Required', 'Please login first');
+                openAuth();
+                return;
+            }
             
             try {
-                const response = await fetch(sheetURL);
-                const data = await response.text();
-                const rows = data.split("\n").map(row => row.split("\t"));
+                // Refresh user data
+                await loadUserData(currentUser.uid);
                 
-                donorData = rows.slice(1).map(row => ({
-                    addedTime: row[0] || 'N/A',
-                    email: row[1] || 'N/A',
-                    bloodGroup: row[2] || 'N/A',
-                    phone: row[3] || 'N/A',
-                    district: (row[4] || '').toUpperCase().trim(),
-                    upazila: (row[5] || '').toUpperCase().trim()
-                })).filter(donor => donor.email !== 'N/A');
+                let profileHTML = `
+                    <h4>Account Information</h4>
+                    <div style="margin-bottom: 1.5rem;">
+                        <p><strong>Email:</strong> ${currentUser.email}</p>
+                        <p><strong>Status:</strong> ${isAdmin ? 'Administrator' : 'Regular User'}</p>
+                        <p><strong>Email Verified:</strong> ${currentUser.emailVerified ? 'Yes' : 'No'}</p>
+                    </div>
+                `;
+                
+                // Add user info if available
+                if (userData) {
+                    profileHTML += `
+                        <h4>Personal Information</h4>
+                        <div style="margin-bottom: 1.5rem;">
+                            ${userData.name ? `<p><strong>Name:</strong> ${userData.name}</p>` : ''}
+                            ${userData.phone ? `<p><strong>Phone:</strong> ${userData.phone}</p>` : ''}
+                            ${userData.location ? `<p><strong>Location:</strong> ${userData.location}</p>` : ''}
+                            ${userData.bloodGroup ? `<p><strong>Blood Group:</strong> ${userData.bloodGroup}</p>` : ''}
+                        </div>
+                    `;
+                }
+                
+                // Add donor profile section
+                profileHTML += `
+                    <h4>Donor Profile</h4>
+                `;
+                
+                if (userData && userData.donorProfile) {
+                    profileHTML += `
+                        <div style="margin-bottom: 1.5rem;">
+                            <p><strong>Donor Status:</strong> ${userData.donorProfile.status || 'Active'}</p>
+                            <p><strong>Availability:</strong> ${userData.donorProfile.availability === 'yes' ? 'Available' : 'Not Available'}</p>
+                            <p><strong>District:</strong> ${userData.donorProfile.district || 'N/A'}</p>
+                            <p><strong>Upazila:</strong> ${userData.donorProfile.upazila || 'N/A'}</p>
+                            <p><strong>Last Updated:</strong> ${formatDate(userData.donorProfile.timestamp?.toDate())}</p>
+                        </div>
+                        <div class="action-buttons-container">
+                            <button onclick="editDonorProfile()" class="btn btn-primary">
+                                <i class="fas fa-edit"></i> Edit Donor Profile
+                            </button>
+                            ${isAdmin ? `
+                                <button onclick="openAdminPanel()" class="btn btn-outline">
+                                    <i class="fas fa-user-shield"></i> Admin Panel
+                                </button>
+                            ` : ''}
+                        </div>
+                    `;
+                } else {
+                    profileHTML += `
+                        <div style="margin-bottom: 1.5rem;">
+                            <p>You don't have a donor profile yet.</p>
+                        </div>
+                        <button onclick="openModal('registrationModal')" class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i> Register as Donor
+                        </button>
+                    `;
+                }
+                
+                document.getElementById('profileContent').innerHTML = profileHTML;
+                openModal('profileModal');
+                
+            } catch (error) {
+                console.error('Error opening profile:', error);
+                showNotification('error', 'Error', 'Failed to load profile');
+            }
+        }
 
-                // Populate unique values for suggestions
-                donorData.forEach(donor => {
-                    if (donor.district) uniqueDistricts.add(donor.district);
-                    if (donor.upazila) uniqueUpazilas.add(donor.upazila);
+        // Edit donor profile
+        function editDonorProfile() {
+            if (userData && userData.donorProfile) {
+                // Pre-fill the form with existing data
+                const donor = userData.donorProfile;
+                
+                document.getElementById('donorName').value = donor.name || '';
+                document.getElementById('donorEmail').value = donor.email || currentUser.email;
+                document.getElementById('donorPhone').value = donor.phone || '';
+                document.getElementById('donorBloodGroup').value = donor.bloodGroup || '';
+                document.getElementById('donorDistrict').value = donor.district || '';
+                document.getElementById('donorUpazila').value = donor.upazila || '';
+                document.getElementById('lastDonation').value = donor.lastDonation || '';
+                
+                if (donor.medicalInfo) {
+                    document.getElementById('medicalInfo').value = donor.medicalInfo;
+                }
+                
+                // Set availability
+                const availabilityInput = document.querySelector(`input[name="availability"][value="${donor.availability || 'yes'}"]`);
+                if (availabilityInput) availabilityInput.checked = true;
+                
+                closeModal('profileModal');
+                openModal('registrationModal');
+            }
+        }
+
+        // Open admin panel
+        function openAdminPanel() {
+            if (!isAdmin) {
+                showNotification('error', 'Access Denied', 'You need administrator privileges');
+                return;
+            }
+            
+            // You can redirect to admin page or open admin modal
+            window.open('admin.html', '_blank');
+            showNotification('success', 'Admin Panel', 'Opening admin panel...');
+        }
+
+        // Login user
+        async function loginUser() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                showLoading(true);
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                
+                // Check admin status
+                const isUserAdmin = ADMIN_EMAILS.includes(email);
+                
+                if (isUserAdmin) {
+                    showNotification('success', 'Admin Login', 'Welcome Administrator!');
+                } else {
+                    showNotification('success', 'Login Successful', 'Welcome back!');
+                }
+                
+                closeAuth();
+            } catch (error) {
+                console.error('Login error:', error);
+                showNotification('error', 'Login Failed', error.message);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Register new user
+        async function registerUser() {
+            const name = document.getElementById('registerName').value.trim();
+            const phone = document.getElementById('registerPhone').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            // Validation
+            if (password !== confirmPassword) {
+                showNotification('error', 'Password Mismatch', 'Passwords do not match');
+                return;
+            }
+            
+            try {
+                showLoading(true);
+                
+                // Create user in Firebase Auth
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+                
+                // Create user document in Firestore
+                await db.collection('users').doc(user.uid).set({
+                    uid: user.uid,
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    phoneVerified: false,
+                    emailVerified: false,
+                    role: 'donor',
+                    status: 'active',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                // Send email verification
+                await user.sendEmailVerification();
+                
+                showNotification('success', 'Registration Successful', 
+                    'Account created! Please check your email for verification.');
+                
+                closeAuth();
+                
+            } catch (error) {
+                console.error('Registration error:', error);
+                showNotification('error', 'Registration Failed', error.message);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Reset password
+        async function resetPassword() {
+            const email = document.getElementById('forgotEmail').value.trim();
+            
+            try {
+                showLoading(true);
+                await auth.sendPasswordResetEmail(email);
+                showNotification('success', 'Reset Email Sent', 'Check your email for password reset instructions');
+                closeAuth();
+            } catch (error) {
+                console.error('Password reset error:', error);
+                showNotification('error', 'Reset Failed', error.message);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Logout function
+        async function logout() {
+            try {
+                await auth.signOut();
+                showNotification('success', 'Logged Out', 'You have been logged out successfully');
+            } catch (error) {
+                console.error('Logout error:', error);
+                showNotification('error', 'Logout Failed', 'Failed to logout');
+            }
+        }
+
+        // Register a new donor
+        async function registerDonor() {
+            if (!currentUser) {
+                showNotification('error', 'Authentication Required', 'Please login or create an account first');
+                openAuth();
+                return;
+            }
+
+            // Validate form
+            const name = document.getElementById('donorName').value.trim();
+            const email = document.getElementById('donorEmail').value.trim();
+            const phone = document.getElementById('donorPhone').value.trim();
+            const bloodGroup = document.getElementById('donorBloodGroup').value;
+            const district = document.getElementById('donorDistrict').value.toUpperCase().trim();
+            const upazila = document.getElementById('donorUpazila').value.toUpperCase().trim();
+            const lastDonation = document.getElementById('lastDonation').value || null;
+            const availability = document.querySelector('input[name="availability"]:checked').value;
+            const medicalInfo = document.getElementById('medicalInfo').value.trim();
+
+            // Basic validation
+            if (!name || !email || !phone || !bloodGroup || !district || !upazila) {
+                showNotification('error', 'Validation Error', 'Please fill in all required fields');
+                return;
+            }
+
+            const donorData = {
+                userId: currentUser.uid,
+                name: name,
+                email: email,
+                phone: phone,
+                bloodGroup: bloodGroup,
+                district: district,
+                upazila: upazila,
+                lastDonation: lastDonation,
+                availability: availability,
+                medicalInfo: medicalInfo,
+                verified: false,
+                phoneVerified: false,
+                emailVerified: currentUser.emailVerified || false,
+                status: 'active',
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+            
+            try {
+                showLoading(true);
+                
+                // Check if user already has a donor profile
+                const existingDonor = await db.collection('donors')
+                    .where('userId', '==', currentUser.uid)
+                    .limit(1)
+                    .get();
+                
+                let action = 'updated';
+                
+                if (!existingDonor.empty) {
+                    // Update existing donor
+                    const donorId = existingDonor.docs[0].id;
+                    await db.collection('donors').doc(donorId).update(donorData);
+                } else {
+                    // Create new donor
+                    const docRef = await db.collection('donors').add(donorData);
+                    action = 'registered';
+                }
+                
+                // Update user profile
+                await db.collection('users').doc(currentUser.uid).update({
+                    name: name,
+                    phone: phone,
+                    bloodGroup: bloodGroup,
+                    location: `${district}, ${upazila}`,
+                    isDonor: true,
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                // Reload user data
+                await loadUserData(currentUser.uid);
+                
+                closeModal('registrationModal');
+                document.getElementById('donorForm').reset();
+                
+                showNotification('success', 'Success', `Donor profile ${action} successfully`);
+                
+            } catch (error) {
+                console.error('Error registering donor:', error);
+                showNotification('error', 'Registration Failed', 'Please try again or contact support');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Submit emergency request
+        async function submitEmergencyRequest() {
+            // Collect form data
+            const emergencyData = {
+                patientName: document.getElementById('patientName').value.trim(),
+                bloodGroup: document.getElementById('emergencyBloodGroup').value,
+                unitsRequired: parseInt(document.getElementById('unitsRequired').value),
+                hospitalName: document.getElementById('hospitalName').value.trim(),
+                hospitalLocation: document.getElementById('hospitalLocation').value.trim(),
+                contactPerson: document.getElementById('contactPerson').value.trim(),
+                contactPhone: document.getElementById('emergencyPhone').value.trim(),
+                urgencyLevel: document.getElementById('urgencyLevel').value,
+                notes: document.getElementById('emergencyNotes').value.trim(),
+                verified: false,
+                status: 'pending',
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                createdAt: new Date().toISOString()
+            };
+            
+            // Validate data
+            if (!emergencyData.patientName || !emergencyData.bloodGroup || !emergencyData.hospitalName || 
+                !emergencyData.contactPerson || !emergencyData.contactPhone) {
+                showNotification('error', 'Validation Error', 'Please fill in all required fields');
+                return;
+            }
+            
+            try {
+                showLoading(true);
+                
+                // Save to Firestore
+                const docRef = await db.collection('emergencies').add(emergencyData);
+                const emergencyId = docRef.id;
+                
+                // Find matching donors
+                const matchingDonors = await findMatchingDonors(emergencyData);
+                
+                // Create notifications for matching donors
+                if (matchingDonors.length > 0) {
+                    await createNotificationsForDonors(matchingDonors, emergencyId, emergencyData);
+                }
+                
+                // Show success message
+                showNotification('success', 'Emergency Request Submitted', 
+                    `Your request has been submitted. ${matchingDonors.length} donor(s) will be notified.`);
+                
+                // Close modal and reset form
+                closeModal('emergencyModal');
+                document.getElementById('emergencyForm').reset();
+                
+                // Send WhatsApp notification (optional)
+                await sendWhatsAppNotification(emergencyData);
+                
+            } catch (error) {
+                console.error('Error submitting emergency:', error);
+                showNotification('error', 'Submission Failed', 'Please try again or call emergency number: +880XXXXXXXXXX');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Find matching donors for emergency
+        async function findMatchingDonors(emergencyData) {
+            try {
+                const donorsSnapshot = await db.collection('donors')
+                    .where('bloodGroup', '==', emergencyData.bloodGroup)
+                    .where('availability', '==', 'yes')
+                    .where('status', '==', 'active')
+                    .get();
+                
+                const matchingDonors = [];
+                donorsSnapshot.forEach(doc => {
+                    matchingDonors.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                return matchingDonors;
+            } catch (error) {
+                console.error('Error finding matching donors:', error);
+                return [];
+            }
+        }
+
+        // Create notifications for matching donors
+        async function createNotificationsForDonors(donors, emergencyId, emergencyData) {
+            try {
+                const batch = db.batch();
+                
+                donors.forEach(donor => {
+                    const notificationRef = db.collection('notifications').doc();
+                    batch.set(notificationRef, {
+                        donorId: donor.id,
+                        donorEmail: donor.email,
+                        donorPhone: donor.phone,
+                        emergencyId: emergencyId,
+                        title: `Emergency Blood Request: ${emergencyData.bloodGroup}`,
+                        message: `Urgent: ${emergencyData.unitsRequired} unit(s) of ${emergencyData.bloodGroup} blood needed at ${emergencyData.hospitalName}. Patient: ${emergencyData.patientName}`,
+                        type: 'emergency',
+                        status: 'unread',
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        urgency: emergencyData.urgencyLevel
+                    });
+                });
+                
+                await batch.commit();
+                console.log(`Created notifications for ${donors.length} donors`);
+                
+            } catch (error) {
+                console.error('Error creating notifications:', error);
+            }
+        }
+
+        // Send WhatsApp notification (optional)
+        async function sendWhatsAppNotification(emergencyData) {
+            try {
+                const whatsappMessage = `🚨 Emergency Blood Request 🚨
+Blood Group: ${emergencyData.bloodGroup}
+Patient: ${emergencyData.patientName}
+Hospital: ${emergencyData.hospitalName}
+Location: ${emergencyData.hospitalLocation}
+Contact: ${emergencyData.contactPerson} - ${emergencyData.contactPhone}
+Urgency: ${emergencyData.urgencyLevel.toUpperCase()}
+Units Needed: ${emergencyData.unitsRequired}`;
+                
+                // Encode message for WhatsApp URL
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+                
+                // Open WhatsApp in new tab
+                window.open(whatsappUrl, '_blank');
+                
+            } catch (error) {
+                console.error('Error sending WhatsApp notification:', error);
+            }
+        }
+
+        // Initialize Firebase data
+        async function initializeFirebaseData() {
+            showNotification('info', 'Loading', 'Connecting to database...');
+            showLoading(true);
+            
+            try {
+                // Fetch donors
+                const donorsSnapshot = await db.collection('donors').get();
+                donorData = [];
+                
+                donorsSnapshot.forEach(doc => {
+                    const data = doc.data();
+                    donorData.push({
+                        id: doc.id,
+                        ...data,
+                        addedTime: data.timestamp?.toDate() || new Date()
+                    });
+                    
+                    if (data.district) uniqueDistricts.add(data.district.toUpperCase());
+                    if (data.upazila) uniqueUpazilas.add(data.upazila.toUpperCase());
                 });
 
                 // Setup autocomplete
@@ -1278,81 +2852,69 @@
 
                 // Display all donors initially
                 displayDonors(donorData);
-                showNotification('success', 'Success', `Loaded ${donorData.length} donors`);
+                updateStats();
+                showNotification('success', 'Connected', `Loaded ${donorData.length} donors`);
+                
+                // Set up real-time listener
+                setupRealtimeListener();
+                
             } catch (error) {
                 console.error('Error fetching data:', error);
-                showNotification('error', 'Error', 'Failed to load donor data');
+                showNotification('error', 'Connection Error', 'Failed to load donor data');
                 showError();
+            } finally {
+                showLoading(false);
             }
         }
 
-        // Fetch statistics
-        async function fetchStatistics() {
-            const sheetURL = 'https://docs.google.com/spreadsheets/d/1p3LQrm9pfvewDNXGZ5sIN_a6hwfbn4AqBcwp8eGPibQ/export?format=tsv';
+        // Setup real-time listener
+        function setupRealtimeListener() {
+            if (unsubscribeDonors) unsubscribeDonors();
             
-            try {
-                const response = await fetch(sheetURL);
-                const tsvText = await response.text();
-                const rows = tsvText.trim().split('\n').map(row => row.split('\t'));
+            unsubscribeDonors = db.collection('donors').onSnapshot((snapshot) => {
+                donorData = [];
+                uniqueDistricts.clear();
+                uniqueUpazilas.clear();
                 
-                if (rows.length > 1 && rows[1].length > 11) {
-                    const totalDonors = rows[1][11];
-                    document.getElementById('totalDonors').textContent = totalDonors + '+';
-                }
-                
-                if (rows.length > 1 && rows[1].length > 16) {
-                    const totalDistricts = rows[1][16];
-                    document.getElementById('totalDistricts').textContent = totalDistricts;
-                }
-                
-                if (rows.length > 1 && rows[1].length > 14) {
-                    const livesSaved = rows[1][14];
-                    document.getElementById('livesSaved').textContent = livesSaved + '+';
-                }
-            } catch (error) {
-                console.error('Error fetching statistics:', error);
-            }
-        }
-
-        // Setup autocomplete
-        function setupAutocomplete(inputId, data, suggestionId) {
-            const input = document.getElementById(inputId);
-            const suggestions = document.getElementById(suggestionId);
-            
-            input.addEventListener('input', function() {
-                const value = this.value.toUpperCase();
-                suggestions.innerHTML = '';
-                
-                if (!value) return;
-                
-                const matches = data.filter(item => item.includes(value)).slice(0, 5);
-                
-                matches.forEach(match => {
-                    const div = document.createElement('div');
-                    div.textContent = match;
-                    div.style.padding = '0.5rem 1rem';
-                    div.style.cursor = 'pointer';
-                    div.style.transition = 'background 0.2s';
-                    div.addEventListener('mouseenter', () => {
-                        div.style.background = 'var(--light-gray)';
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    donorData.push({
+                        id: doc.id,
+                        ...data,
+                        addedTime: data.timestamp?.toDate() || new Date()
                     });
-                    div.addEventListener('mouseleave', () => {
-                        div.style.background = 'white';
-                    });
-                    div.addEventListener('click', () => {
-                        input.value = match;
-                        suggestions.innerHTML = '';
-                    });
-                    suggestions.appendChild(div);
+                    
+                    if (data.district) uniqueDistricts.add(data.district.toUpperCase());
+                    if (data.upazila) uniqueUpazilas.add(data.upazila.toUpperCase());
                 });
-            });
-            
-            // Hide suggestions when clicking outside
-            document.addEventListener('click', (e) => {
-                if (e.target !== input) {
-                    suggestions.innerHTML = '';
+
+                // Update display with current filters
+                const filteredData = getFilteredData();
+                displayDonors(filteredData);
+                updateStats();
+                
+                // Show notification for new donors
+                if (snapshot.docChanges().some(change => change.type === 'added')) {
+                    showNotification('info', 'Updated', 'Donor list updated in real-time');
                 }
+            }, (error) => {
+                console.error('Real-time listener error:', error);
+                showNotification('error', 'Connection Lost', 'Reconnecting...');
             });
+        }
+
+        // Update statistics
+        function updateStats() {
+            const availableCount = donorData.filter(d => d.availability === 'yes').length;
+            const totalCount = donorData.length;
+            
+            document.getElementById('availableDonors').textContent = availableCount;
+            document.getElementById('totalRegistrations').textContent = totalCount;
+            document.getElementById('heroStat1').textContent = totalCount + '+';
+            
+            // Update district count
+            const districtCount = new Set(donorData.map(d => d.district)).size;
+            document.getElementById('heroStat2').textContent = districtCount || 64;
         }
 
         // Search donors
@@ -1370,12 +2932,25 @@
             
             displayDonors(filtered);
             
-            // Show notification
             if (filtered.length === 0) {
                 showNotification('warning', 'No Results', 'No donors found matching your criteria');
             } else {
                 showNotification('success', 'Search Complete', `Found ${filtered.length} donor(s)`);
             }
+        }
+
+        // Get filtered data
+        function getFilteredData() {
+            const blood = document.getElementById('searchBlood').value.toUpperCase();
+            const district = document.getElementById('searchDistrict').value.toUpperCase().trim();
+            const upazila = document.getElementById('searchUpazila').value.toUpperCase().trim();
+            
+            return donorData.filter(donor => {
+                const bloodMatch = !blood || donor.bloodGroup === blood;
+                const districtMatch = !district || donor.district.includes(district);
+                const upazilaMatch = !upazila || donor.upazila.includes(upazila);
+                return bloodMatch && districtMatch && upazilaMatch;
+            });
         }
 
         // Display donors based on current view
@@ -1438,6 +3013,11 @@
                         </div>
                     </div>
                     
+                    <div class="donor-name">
+                        <i class="fas fa-user" style="color: var(--secondary); margin-right: 8px;"><b></i>
+                        ${donor.name}
+                    </b></div>
+                    
                     <div class="donor-email">${donor.email}</div>
                     <div class="donor-phone">
                         <i class="fas fa-phone" style="color: var(--secondary); margin-right: 8px;"></i>
@@ -1480,10 +3060,147 @@
                 return dateString;
             }
         }
-        
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            this.classList.toggle('active');
-        });
+
+        // Setup autocomplete
+        function setupAutocomplete(inputId, data, suggestionId) {
+            const input = document.getElementById(inputId);
+            const suggestions = document.getElementById(suggestionId);
+            
+            if (!input || !suggestions) return;
+            
+            input.addEventListener('input', function() {
+                const value = this.value.toUpperCase();
+                suggestions.innerHTML = '';
+                
+                if (!value) {
+                    suggestions.style.display = 'none';
+                    return;
+                }
+                
+                const matches = data.filter(item => item.includes(value)).slice(0, 5);
+                
+                if (matches.length === 0) {
+                    suggestions.style.display = 'none';
+                    return;
+                }
+                
+                suggestions.style.display = 'block';
+                
+                matches.forEach(match => {
+                    const div = document.createElement('div');
+                    div.textContent = match;
+                    div.style.padding = '0.5rem 1rem';
+                    div.style.cursor = 'pointer';
+                    div.style.transition = 'background 0.2s';
+                    div.addEventListener('mouseenter', () => {
+                        div.style.background = 'var(--light-gray)';
+                    });
+                    div.addEventListener('mouseleave', () => {
+                        div.style.background = 'white';
+                    });
+                    div.addEventListener('click', () => {
+                        input.value = match;
+                        suggestions.innerHTML = '';
+                        suggestions.style.display = 'none';
+                    });
+                    suggestions.appendChild(div);
+                });
+            });
+            
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                if (e.target !== input) {
+                    suggestions.innerHTML = '';
+                    suggestions.style.display = 'none';
+                }
+            });
+        }
+
+        // Modal functions
+        function openAuth() {
+            document.getElementById('authContainer').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAuth() {
+            document.getElementById('authContainer').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            // Reset forms
+            document.getElementById('loginFormElement').reset();
+            document.getElementById('registerFormElement').reset();
+            document.getElementById('forgotFormElement').reset();
+        }
+
+        function switchAuthTab(tab) {
+            // Update tabs
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-content').forEach(c => c.classList.remove('active'));
+            
+            document.querySelectorAll('.auth-tab')[tab === 'login' ? 0 : tab === 'register' ? 1 : 2].classList.add('active');
+            document.getElementById(tab + 'Form').classList.add('active');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal, .auth-container');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        };
+
+        // Show loading spinner
+        function showLoading(show) {
+            const spinner = document.getElementById('loadingSpinner');
+            spinner.style.display = show ? 'block' : 'none';
+        }
+
+        // Notification system
+        function showNotification(type, title, message, duration = 3000) {
+            const container = document.getElementById('notificationContainer');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            let icon = 'fa-info-circle';
+            switch(type) {
+                case 'success': icon = 'fa-check-circle'; break;
+                case 'error': icon = 'fa-exclamation-circle'; break;
+                case 'warning': icon = 'fa-exclamation-triangle'; break;
+                case 'info': icon = 'fa-info-circle'; break;
+            }
+            
+            notification.innerHTML = `
+                <i class="fas ${icon}"></i>
+                <div class="notification-content">
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-message">${message}</div>
+                </div>
+                <button class="notification-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.style.animation = 'slideOut 0.3s ease forwards';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, duration);
+        }
 
         // Show table view
         function showTableView() {
@@ -1505,20 +3222,6 @@
             document.getElementById('cardViewBtn').classList.add('active');
             displayCardView(getFilteredData());
             showNotification('info', 'View Changed', 'Switched to Card View');
-        }
-
-        // Get currently filtered data
-        function getFilteredData() {
-            const blood = document.getElementById('searchBlood').value.toUpperCase();
-            const district = document.getElementById('searchDistrict').value.toUpperCase().trim();
-            const upazila = document.getElementById('searchUpazila').value.toUpperCase().trim();
-            
-            return donorData.filter(donor => {
-                const bloodMatch = !blood || donor.bloodGroup === blood;
-                const districtMatch = !district || donor.district.includes(district);
-                const upazilaMatch = !upazila || donor.upazila.includes(upazila);
-                return bloodMatch && districtMatch && upazilaMatch;
-            });
         }
 
         // Clear search
@@ -1578,7 +3281,7 @@
             
             let csv = 'Blood Group,Email,Phone,District,Upazila,Registration Date\n';
             data.forEach(donor => {
-                csv += `${donor.bloodGroup},${donor.email},${donor.phone},${donor.district},${donor.upazila},${donor.addedTime}\n`;
+                csv += `${donor.bloodGroup},${donor.email},${donor.phone},${donor.district},${donor.upazila},${formatDate(donor.addedTime)}\n`;
             });
             
             const blob = new Blob([csv], { type: 'text/csv' });
@@ -1591,419 +3294,139 @@
             showNotification('success', 'Download Started', `Downloading ${data.length} donor(s) as CSV`);
         }
 
-        // Download PDF with enhanced features
-async function downloadPDF() {
-    try {
-        const data = getFilteredData();
-        
-        if (data.length === 0) {
-            showNotification('warning', 'No Data Available', 'Please apply filters to get donor data before downloading.');
-            return;
-        }
+        // Download PDF
+        async function downloadPDF() {
+            const data = getFilteredData();
+            
+            if (data.length === 0) {
+                showNotification('warning', 'No Data Available', 'Please apply filters to get donor data before downloading.');
+                return;
+            }
 
-        // Show loading state with progress
-        const notificationId = showNotification('info', 'Generating PDF', 
-            `Processing ${data.length} donor${data.length > 1 ? 's' : ''}...`, 
-            true // persistent
-        );
+            // Show loading state
+            showNotification('info', 'Generating PDF', `Processing ${data.length} donor${data.length > 1 ? 's' : ''}...`, 5000);
 
-        // Create enhanced document structure
-        const element = document.createElement('div');
-        element.className = 'pdf-container';
-        
-        // Statistics calculation
-        const bloodGroupStats = {};
-        const districtStats = {};
-        data.forEach(donor => {
-            bloodGroupStats[donor.bloodGroup] = (bloodGroupStats[donor.bloodGroup] || 0) + 1;
-            districtStats[donor.district] = (districtStats[donor.district] || 0) + 1;
-        });
+            // Create document structure
+            const element = document.createElement('div');
+            element.className = 'pdf-container';
+            
+            const totalDonors = data.length;
+            const limitedData = data.slice(0, 100);
+            const hasMoreData = data.length > 100;
 
-        const mostCommonBloodGroup = Object.keys(bloodGroupStats).reduce((a, b) => 
-            bloodGroupStats[a] > bloodGroupStats[b] ? a : b
-        );
-
-        const totalDonors = data.length;
-        const limitedData = data.slice(0, 100); // Show up to 100 records
-        const hasMoreData = data.length > 100;
-
-        element.innerHTML = `
-            <div style="
-                font-family: 'Segoe UI', Arial, sans-serif;
-                padding: 25px;
-                color: #333;
-                background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-            ">
-                <!-- Header Section -->
-                <div style="
-                    text-align: center;
-                    margin-bottom: 30px;
-                    padding-bottom: 20px;
-                    border-bottom: 2px solid #e63946;
-                ">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px;">
-                        <div style="
-                            width: 40px;
-                            height: 40px;
-                            background: #e63946;
-                            border-radius: 50%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            color: white;
-                            font-weight: bold;
-                        ">
-                            ❤️
-                        </div>
-                        <h1 style="
-                            color: #e63946;
-                            margin: 0;
-                            font-size: 28px;
-                            font-weight: 600;
-                            letter-spacing: -0.5px;
-                        ">
+            element.innerHTML = `
+                <div style="font-family: 'Segoe UI', Arial, sans-serif; padding: 25px; color: #333;">
+                    <!-- Header -->
+                    <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e63946;">
+                        <h1 style="color: #e63946; margin: 0; font-size: 28px; font-weight: 600;">
                             Blood Donor BD
                         </h1>
+                        <p style="color: #666; margin: 5px 0; font-size: 14px;">
+                            Life Saver Network • Registered Donor Database
+                        </p>
                     </div>
-                    <p style="color: #666; margin: 5px 0; font-size: 14px;">
-                        Life Saver Network • Registered Donor Database
-                    </p>
-                </div>
 
-                <!-- Metadata & Stats Section -->
-                <div style="
-                    background: white;
-                    border-radius: 12px;
-                    padding: 20px;
-                    margin-bottom: 25px;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-                    border: 1px solid #eaeaea;
-                ">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                        <div>
-                            <h3 style="color: #e63946; margin: 0 0 15px 0; font-size: 18px;">Report Summary</h3>
-                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
-                                <div>
-                                    <div style="font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">
-                                        Total Donors
+                    <!-- Report Info -->
+                    <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 25px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <div>
+                                <h3 style="color: #e63946; margin: 0 0 15px 0; font-size: 18px;">Report Summary</h3>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                                    <div>
+                                        <div style="font-size: 12px; color: #666;">Total Donors</div>
+                                        <div style="font-size: 24px; font-weight: 700; color: #e63946;">${totalDonors}</div>
                                     </div>
-                                    <div style="font-size: 24px; font-weight: 700; color: #e63946;">
-                                        ${totalDonors}
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style="font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">
-                                        Most Needed
-                                    </div>
-                                    <div style="font-size: 24px; font-weight: 700; color: #2a9d8f;">
-                                        ${mostCommonBloodGroup}
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style="font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">
-                                        Generated On
-                                    </div>
-                                    <div style="font-size: 18px; font-weight: 600; color: #333;">
-                                        ${new Date().toLocaleDateString('en-US', { 
-                                            weekday: 'long',
-                                            year: 'numeric', 
-                                            month: 'long', 
-                                            day: 'numeric',
-                                            hour: '2-digit',
-                                            minute: '2-digit'
-                                        })}
+                                    <div>
+                                        <div style="font-size: 12px; color: #666;">Generated On</div>
+                                        <div style="font-size: 18px; font-weight: 600; color: #333;">
+                                            ${new Date().toLocaleDateString('en-US', { 
+                                                year: 'numeric', 
+                                                month: 'long', 
+                                                day: 'numeric'
+                                            })}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div style="
-                            background: #f8f9fa;
-                            padding: 15px;
-                            border-radius: 8px;
-                            border-left: 4px solid #e63946;
-                        ">
-                            <div style="font-size: 12px; color: #666; margin-bottom: 5px;">
-                                Report ID
-                            </div>
-                            <div style="font-family: 'Courier New', monospace; font-size: 14px; color: #333;">
-                                BD-${Date.now().toString().slice(-8)}
-                            </div>
-                        </div>
                     </div>
 
-                    <!-- Blood Group Distribution -->
-                    <div style="margin-top: 20px;">
-                        <h4 style="color: #555; margin: 0 0 10px 0; font-size: 15px;">Blood Group Distribution</h4>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            ${Object.entries(bloodGroupStats).map(([group, count]) => `
-                                <div style="
-                                    background: linear-gradient(135deg, #ff6b6b, #e63946);
-                                    color: white;
-                                    padding: 6px 12px;
-                                    border-radius: 20px;
-                                    font-size: 13px;
-                                    font-weight: 600;
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 6px;
-                                ">
-                                    <span>${group}</span>
-                                    <span style="
-                                        background: rgba(255,255,255,0.2);
-                                        padding: 2px 8px;
-                                        border-radius: 12px;
-                                        font-size: 12px;
-                                    ">${count}</span>
-                                </div>
-                            `).join('')}
+                    <!-- Data Table -->
+                    <div style="background: white; border-radius: 12px; overflow: hidden; margin-bottom: 25px;">
+                        <div style="background: #e63946; color: white; padding: 15px 20px;">
+                            <h2 style="margin: 0; font-size: 18px; font-weight: 600;">
+                                Donor List ${hasMoreData ? `(Top 100 of ${totalDonors})` : ''}
+                            </h2>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Data Table -->
-                <div style="
-                    background: white;
-                    border-radius: 12px;
-                    overflow: hidden;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-                    margin-bottom: 25px;
-                ">
-                    <div style="
-                        background: linear-gradient(135deg, #e63946, #d62839);
-                        color: white;
-                        padding: 15px 20px;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                    ">
-                        <h2 style="margin: 0; font-size: 18px; font-weight: 600;">
-                            Donor List ${hasMoreData ? `(Top 100 of ${totalDonors})` : ''}
-                        </h2>
-                        <div style="font-size: 13px; opacity: 0.9;">
-                            ${limitedData.length} record${limitedData.length > 1 ? 's' : ''}
-                        </div>
-                    </div>
-                    
-                    <table style="
-                        width: 100%;
-                        border-collapse: collapse;
-                        font-size: 13px;
-                    ">
-                        <thead>
-                            <tr style="background: #f8f9fa;">
-                                <th style="
-                                    padding: 14px 16px;
-                                    text-align: left;
-                                    font-weight: 600;
-                                    color: #555;
-                                    border-bottom: 2px solid #eaeaea;
-                                    width: 15%;
-                                ">Blood Group</th>
-                                <th style="
-                                    padding: 14px 16px;
-                                    text-align: left;
-                                    font-weight: 600;
-                                    color: #555;
-                                    border-bottom: 2px solid #eaeaea;
-                                    width: 25%;
-                                ">Contact Email</th>
-                                <th style="
-                                    padding: 14px 16px;
-                                    text-align: left;
-                                    font-weight: 600;
-                                    color: #555;
-                                    border-bottom: 2px solid #eaeaea;
-                                    width: 20%;
-                                ">Phone Number</th>
-                                <th style="
-                                    padding: 14px 16px;
-                                    text-align: left;
-                                    font-weight: 600;
-                                    color: #555;
-                                    border-bottom: 2px solid #eaeaea;
-                                    width: 20%;
-                                ">District</th>
-                                <th style="
-                                    padding: 14px 16px;
-                                    text-align: left;
-                                    font-weight: 600;
-                                    color: #555;
-                                    border-bottom: 2px solid #eaeaea;
-                                    width: 20%;
-                                ">Upazila</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${limitedData.map((donor, index) => `
-                                <tr style="
-                                    border-bottom: 1px solid #f0f0f0;
-                                    transition: background 0.2s;
-                                    ${index % 2 === 0 ? 'background: #fafafa;' : ''}
-                                ">
-                                    <td style="padding: 14px 16px;">
-                                        <span style="
-                                            display: inline-flex;
-                                            align-items: center;
-                                            gap: 6px;
-                                            background: ${getBloodGroupColor(donor.bloodGroup)};
-                                            color: white;
-                                            padding: 4px 12px;
-                                            border-radius: 15px;
-                                            font-weight: 600;
-                                            font-size: 12px;
-                                        ">
-                                            ${donor.bloodGroup}
-                                        </span>
-                                    </td>
-                                    <td style="padding: 14px 16px; color: #0066cc; word-break: break-all;">
-                                        ${donor.email}
-                                    </td>
-                                    <td style="padding: 14px 16px; font-family: 'Courier New', monospace;">
-                                        ${formatPhoneNumber(donor.phone)}
-                                    </td>
-                                    <td style="padding: 14px 16px;">
-                                        ${donor.district}
-                                    </td>
-                                    <td style="padding: 14px 16px; color: #555;">
-                                        ${donor.upazila}
-                                    </td>
+                        
+                        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                            <thead>
+                                <tr style="background: #f8f9fa;">
+                                    <th style="padding: 14px 16px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #eaeaea;">Blood Group</th>
+                                    <th style="padding: 14px 16px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #eaeaea;">Contact Email</th>
+                                    <th style="padding: 14px 16px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #eaeaea;">Phone Number</th>
+                                    <th style="padding: 14px 16px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #eaeaea;">District</th>
+                                    <th style="padding: 14px 16px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #eaeaea;">Upazila</th>
                                 </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                    
-                    ${hasMoreData ? `
-                        <div style="
-                            background: #fff3cd;
-                            padding: 12px 20px;
-                            border-top: 1px solid #ffeaa7;
-                            text-align: center;
-                            color: #856404;
-                            font-size: 13px;
-                        ">
-                            ⓘ Showing top 100 donors only. Full dataset contains ${totalDonors} records.
+                            </thead>
+                            <tbody>
+                                ${limitedData.map((donor, index) => `
+                                    <tr style="border-bottom: 1px solid #f0f0f0; ${index % 2 === 0 ? 'background: #fafafa;' : ''}">
+                                        <td style="padding: 14px 16px;">
+                                            <span style="display: inline-block; background: #e63946; color: white; padding: 4px 12px; border-radius: 15px; font-weight: 600; font-size: 12px;">
+                                                ${donor.bloodGroup}
+                                            </span>
+                                        </td>
+                                        <td style="padding: 14px 16px; color: #0066cc; word-break: break-all;">
+                                            ${donor.email}
+                                        </td>
+                                        <td style="padding: 14px 16px; font-family: 'Courier New', monospace;">
+                                            ${donor.phone}
+                                        </td>
+                                        <td style="padding: 14px 16px;">
+                                            ${donor.district}
+                                        </td>
+                                        <td style="padding: 14px 16px; color: #555;">
+                                            ${donor.upazila}
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Footer -->
+                    <div style="text-align: center; padding: 20px; color: #666; font-size: 12px; border-top: 1px solid #eaeaea;">
+                        <div style="margin-bottom: 10px;">
+                            <span style="color: #e63946; font-weight: 600;">❤️ Every Donor Saves Lives</span>
                         </div>
-                    ` : ''}
-                </div>
-
-                <!-- Footer -->
-                <div style="
-                    text-align: center;
-                    padding: 20px;
-                    color: #666;
-                    font-size: 12px;
-                    border-top: 1px solid #eaeaea;
-                    margin-top: 20px;
-                ">
-                    <div style="margin-bottom: 10px;">
-                        <span style="color: #e63946; font-weight: 600;">❤️ Every Donor Saves Lives</span>
-                        • 
-                        <span>Emergency Hotline: 16265</span>
-                        •
-                        <span>Email: support@blooddonorbd.org</span>
-                    </div>
-                    <div>
-                        &copy; ${new Date().getFullYear()} Blood Donor BD. All rights reserved.
-                        <br>
-                        <span style="font-size: 11px; opacity: 0.7;">
-                            This document is generated automatically and should be handled with confidentiality.
-                        </span>
+                        <div>
+                            &copy; ${new Date().getFullYear()} Blood Donor BD. All rights reserved.
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
+            `;
 
-        // Helper functions (define these outside if not already)
-        function getBloodGroupColor(bloodGroup) {
-            const colors = {
-                'A+': '#dc3545',
-                'A-': '#e35d6a',
-                'B+': '#28a745',
-                'B-': '#5cb85c',
-                'O+': '#ffc107',
-                'O-': '#ffd54f',
-                'AB+': '#17a2b8',
-                'AB-': '#5bc0de'
-            };
-            return colors[bloodGroup] || '#6c757d';
+            // Generate PDF
+            await html2pdf()
+                .set({
+                    margin: [10, 10, 10, 10],
+                    filename: `Blood_Donor_BD_Report_${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.pdf`,
+                    html2canvas: { 
+                        scale: 2,
+                        useCORS: true
+                    },
+                    jsPDF: { 
+                        unit: 'mm', 
+                        format: 'a4', 
+                        orientation: 'landscape'
+                    }
+                })
+                .from(element)
+                .save();
+
+            showNotification('success', 'PDF Generated', `Downloaded report with ${totalDonors} donor${totalDonors > 1 ? 's' : ''}`);
         }
-
-        function formatPhoneNumber(phone) {
-            const cleaned = phone.replace(/\D/g, '');
-            if (cleaned.length === 11) {
-                return cleaned.replace(/(\d{4})(\d{3})(\d{4})/, '$1-$2-$3');
-            }
-            return phone;
-        }
-
-        // Generate PDF with enhanced settings
-        await html2pdf()
-            .set({
-                margin: [10, 10, 10, 10],
-                filename: `Blood_Donor_BD_Report_${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}.pdf`,
-                html2canvas: { 
-                    scale: 2,
-                    useCORS: true,
-                    logging: false,
-                    letterRendering: true,
-                    windowWidth: 720
-                },
-                jsPDF: { 
-                    unit: 'mm', 
-                    format: 'a4', 
-                    orientation: 'landscape',
-                    compress: true
-                },
-                pagebreak: { mode: 'avoid-all' },
-                image: { type: 'jpeg', quality: 0.98 }
-            })
-            .from(element)
-            .save();
-
-        // Success notification with enhanced UX
-        showNotification('success', 'PDF Generated Successfully', 
-            `✅ Downloaded report with ${totalDonors} donor${totalDonors > 1 ? 's' : ''}. ` +
-            `File: Blood_Donor_BD_Report_${new Date().toLocaleDateString('en-CA')}.pdf`
-        );
-
-        // Optional: Analytics event
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'pdf_download', {
-                donor_count: totalDonors,
-                blood_groups: Object.keys(bloodGroupStats).join(','),
-                report_id: `BD-${Date.now().toString().slice(-8)}`
-            });
-        }
-
-    } catch (error) {
-        console.error('PDF Generation Error:', error);
-        showNotification('error', 'Generation Failed', 
-            'Failed to generate PDF. Please try again or contact support if the issue persists.'
-        );
-    }
-}
-
-// Optional: Add CSS styles for better rendering
-function addPDFStyles() {
-    const style = document.createElement('style');
-    style.textContent = `
-        .pdf-container * {
-            box-sizing: border-box;
-        }
-        
-        @media print {
-            .pdf-container {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// Call this once on page load
-addPDFStyles();
-        
 
         // Show error
         function showError() {
@@ -2015,7 +3438,7 @@ addPDFStyles();
                     <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; display: block; color: var(--light-gray);"></i>
                     <h3 style="margin-bottom: 0.5rem; color: var(--dark);">Failed to load data</h3>
                     <p style="margin-bottom: 1rem;">Please check your internet connection and try again.</p>
-                    <button onclick="fetchDonors()" class="btn btn-primary">
+                    <button onclick="initializeFirebaseData()" class="btn btn-primary">
                         <i class="fas fa-redo"></i> Retry
                     </button>
                 </div>
